@@ -1,4 +1,4 @@
-# Claude Plugin Marketplace
+# Claude Code Plugins
 
 A curated collection of custom agents and slash commands to enhance [Claude Code](https://claude.ai/code) with powerful development workflows.
 
