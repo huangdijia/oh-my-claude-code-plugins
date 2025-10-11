@@ -100,21 +100,21 @@ Use the code-reviewer agent to review my recent changes
 **Create a commit:**
 
 ```bash
-/commit:create
+/devtools:commit:create
 ```
 
 **Create and review PRs:**
 
 ```bash
-/pr:create
-/pr:review 123
+/devtools:pr:create
+/devtools:pr:review 123
 ```
 
 **Review with specific scope:**
 
 ```bash
-/mr:review 456 performance
-/mr:review 789 security
+/devtools:mr:review 456 performance
+/devtools:mr:review 789 security
 ```
 
 ## 📚 Documentation
@@ -217,7 +217,7 @@ claude-marketplace/
 
 ```bash
 # Automated PR review with security focus
-/pr:review 123 security
+/devtools:pr:review 123 security
 ```
 
 ### Project Setup
@@ -265,9 +265,9 @@ The agent will:
 Focus code reviews on specific aspects:
 
 ```bash
-/pr:review 123 performance    # Focus on performance issues
-/pr:review 456 security       # Focus on security vulnerabilities
-/pr:review 789 style          # Focus on code style and conventions
+/devtools:pr:review 123 performance    # Focus on performance issues
+/devtools:pr:review 456 security       # Focus on security vulnerabilities
+/devtools:pr:review 789 style          # Focus on code style and conventions
 ```
 
 ### Spec Management
