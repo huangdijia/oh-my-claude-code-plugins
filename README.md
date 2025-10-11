@@ -56,7 +56,7 @@ This plugin implements a three-phase development workflow:
 
 Use the strategic planner to design your feature:
 
-```
+```markdown
 Use the strategic-planner agent to help me plan a user authentication feature
 ```
 
@@ -70,7 +70,7 @@ This creates structured specs in `specs/<feature-name>/`:
 
 Execute tasks one-by-one with surgical precision:
 
-```
+```markdown
 Use the task-executor agent to implement the next task from specs/user-auth/tasks.md
 ```
 
@@ -85,7 +85,7 @@ The agent will:
 
 Automated quality assurance:
 
-```
+```bash
 Use the code-reviewer agent to review my recent changes
 ```
 
@@ -93,20 +93,20 @@ Use the code-reviewer agent to review my recent changes
 
 **Create a commit:**
 
-```
+```bash
 /commit:create
 ```
 
 **Create and review PRs:**
 
-```
+```bash
 /pr:create
 /pr:review 123
 ```
 
 **Review with specific scope:**
 
-```
+```bash
 /mr:review 456 performance
 /mr:review 789 security
 ```
@@ -117,7 +117,7 @@ Use the code-reviewer agent to review my recent changes
 
 The plugin implements a sophisticated multi-agent system:
 
-```
+```bash
 ┌─────────────────────────────────────────────────────────┐
 │  Phase 1: Strategic Planning                            │
 │  → Analyze requirements                                 │
@@ -145,7 +145,7 @@ The plugin implements a sophisticated multi-agent system:
 
 Use the steering-architect agent to set up project governance:
 
-```
+```markdown
 Use the steering-architect agent to analyze this project
 ```
 
@@ -168,11 +168,11 @@ Each agent has specific tool access for security:
 
 ## 🏗️ Project Structure
 
-```
+```bash
 claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry
-└── dev-tools/                    # Main plugin
+└── devtools/                     # Main plugin
     ├── agents/                   # AI agent definitions
     │   ├── strategic-planner.md
     │   ├── task-executor.md
@@ -207,14 +207,14 @@ claude-marketplace/
 
 ### Project Setup
 
-```
+```markdown
 # Initialize project documentation
 Use the steering-architect agent to set up project standards
 ```
 
 ### Data Analysis
 
-```
+```markdown
 # SQL and data analysis
 Use the data-scientist agent to analyze user metrics from the database
 ```
@@ -233,7 +233,7 @@ Several components output in Chinese for the target user base:
 
 Enable autonomous mode for unattended task execution:
 
-```
+```markdown
 Use the task-executor agent in autonomous mode to complete all remaining tasks
 ```
 
@@ -257,7 +257,7 @@ Focus code reviews on specific aspects:
 
 Organize features with spec directories:
 
-```
+```bash
 specs/
 ├── user-authentication/
 │   ├── requirements.md
