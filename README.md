@@ -23,17 +23,17 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 **GitHub:**
 
-- `/pr:create` - Create Pull Requests with automated branch management
-- `/pr:review` - Comprehensive PR code review with structured analysis
+- `/devtools:pr:create` - Create Pull Requests with automated branch management
+- `/devtools:pr:review` - Comprehensive PR code review with structured analysis
 
 **GitLab:**
 
-- `/mr:create` - Create Merge Requests
-- `/mr:review` - MR review with customizable scope (performance, security, style)
+- `/devtools:mr:create` - Create Merge Requests
+- `/devtools:mr:review` - MR review with customizable scope (performance, security, style)
 
 **Git:**
 
-- `/commit:create` - Generate semantic commits from staged changes
+- `/devtools:commit:create` - Generate semantic commits from staged changes
 
 ## 📦 Installation
 
