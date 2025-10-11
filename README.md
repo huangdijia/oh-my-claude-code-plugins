@@ -207,7 +207,7 @@ claude-marketplace/
 
 ### Feature Development
 
-```
+```text
 1. Plan: Use strategic-planner to design feature
 2. Build: Use task-executor to implement tasks
 3. Review: Use code-reviewer to validate quality
@@ -215,7 +215,7 @@ claude-marketplace/
 
 ### Code Review Automation
 
-```
+```bash
 # Automated PR review with security focus
 /pr:review 123 security
 ```
@@ -264,7 +264,7 @@ The agent will:
 
 Focus code reviews on specific aspects:
 
-```
+```bash
 /pr:review 123 performance    # Focus on performance issues
 /pr:review 456 security       # Focus on security vulnerabilities
 /pr:review 789 style          # Focus on code style and conventions
