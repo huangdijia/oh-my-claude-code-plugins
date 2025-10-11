@@ -37,7 +37,7 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 ## 📦 Installation
 
-### Option 1: Install from GitHub
+### Install from GitHub
 
 1. Run the following command in Claude Code:
 

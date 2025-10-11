@@ -37,7 +37,7 @@
 
 ## 📦 安装
 
-### 选项 1：从 GitHub 安装
+### 从 GitHub 安装
 
 1. 在 Claude Code 中运行以下命令：
 
