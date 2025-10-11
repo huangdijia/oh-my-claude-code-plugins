@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "devtools",
-      "source": "./plugins/dev-tools",
+      "source": "./plugins/devtools",
       "description": "Plugin under development",
       "category": "development"
     }

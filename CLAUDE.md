@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a Claude Code plugin marketplace repository that provides custom agents and slash commands to extend Claude Code functionality. The main plugin is located in the `dev-tools/` directory.
+This is a Claude Code plugin marketplace repository that provides custom agents and slash commands to extend Claude Code functionality. The main plugin is located in the `plugins/devtools/` directory.
 
 ## Project Structure
 
@@ -12,32 +12,33 @@ This is a Claude Code plugin marketplace repository that provides custom agents 
 claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry configuration
-└── dev-tools/                    # Main plugin directory
-    ├── agents/                   # Custom AI agent definitions
-    │   ├── code-reviewer.md      # Code quality and security review agent
-    │   ├── data-scientist.md     # Data analysis and SQL specialist
-    │   ├── debuger.md           # Error debugging specialist
-    │   ├── prd-writer.md        # Product requirements document writer
-    │   ├── steering-architect.md # Project analysis and documentation architect
-    │   ├── strategic-planner.md  # Feature planning and technical design
-    │   └── task-executor.md      # Precise task execution agent
-    ├── commands/                 # Slash command definitions
-    │   ├── commit/
-    │   │   └── create.md        # /commit:create command
-    │   ├── mr/
-    │   │   ├── create.md        # /mr:create command (GitLab)
-    │   │   └── review.md        # /mr:review command (GitLab)
-    │   └── pr/
-    │       ├── create.md        # /pr:create command (GitHub)
-    │       └── review.md        # /pr:review command (GitHub)
-    └── hooks/                    # Event hooks (empty)
+└── plugins/
+    └── devtools/                 # Main plugin directory
+        ├── agents/               # Custom AI agent definitions
+        │   ├── code-reviewer.md  # Code quality and security review agent
+        │   ├── data-scientist.md # Data analysis and SQL specialist
+        │   ├── debuger.md        # Error debugging specialist
+        │   ├── prd-writer.md     # Product requirements document writer
+        │   ├── steering-architect.md # Project analysis and documentation architect
+        │   ├── strategic-planner.md  # Feature planning and technical design
+        │   └── task-executor.md  # Precise task execution agent
+        ├── commands/             # Slash command definitions
+        │   ├── commit/
+        │   │   └── create.md     # /commit:create command
+        │   ├── mr/
+        │   │   ├── create.md     # /mr:create command (GitLab)
+        │   │   └── review.md     # /mr:review command (GitLab)
+        │   └── pr/
+        │       ├── create.md     # /pr:create command (GitHub)
+        │       └── review.md     # /pr:review command (GitHub)
+        └── hooks/                # Event hooks (empty)
 ```
 
 ## Architecture
 
 ### Plugin System
 
-The plugin is registered via `.claude-plugin/marketplace.json` which defines the plugin source location and metadata. The `dev-tools` plugin contains:
+The plugin is registered via `.claude-plugin/marketplace.json` which defines the plugin source location and metadata. The `devtools` plugin contains:
 
 1. **Agents** - Specialized AI personas with specific roles and tools
 2. **Commands** - Slash commands that expand to predefined prompts
@@ -78,7 +79,7 @@ The repository implements a multi-agent workflow system with three primary phase
 
 - **data-scientist**: SQL queries, BigQuery operations, and data analysis
 
-- **debuger**: Error troubleshooting and root cause analysis
+- **debugger**: Error troubleshooting and root cause analysis
 
 - **prd-writer**: Product requirements documentation generation
 
@@ -102,6 +103,29 @@ The PR/MR review commands support optional parameters:
 
 - `$LANGUAGE` - Target code language
 - `$SCOPE` - Focus area (performance, security, style)
+
+## Plugin Configuration
+
+The plugin is configured in `.claude-plugin/marketplace.json`:
+
+```json
+{
+  "name": "claude-code-plugins",
+  "owner": {
+    "name": "Developer"
+  },
+  "plugins": [
+    {
+      "name": "devtools",
+      "source": "./plugins/devtools",
+      "description": "Plugin under development",
+      "category": "development"
+    }
+  ]
+}
+```
+
+The `source` field must match the actual directory path (`./plugins/devtools`).
 
 ## Key Conventions
 
@@ -136,7 +160,12 @@ Each agent has specific tool access defined in frontmatter:
 - `task-executor`: file_edit, bash, file_search
 - `code-reviewer`: file_search, bash, file_edit
 - `steering-architect`: file_edit, file_search, bash
+- `data-scientist`: bash, file_search, file_edit
+- `debugger`: file_search, file_edit, bash
+- `prd-writer`: file_edit, web_search, file_search (NO code execution)
 
 ## Language Note
 
 Several agents and commands output in Chinese (code-reviewer, pr:review, mr:review, and Chinese-language agent definitions). This is intentional for the target user base.
+
+**Note:** The debugger agent filename is `debuger.md` (without 'g') while the agent name is `debugger`.

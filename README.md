@@ -16,7 +16,7 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 - **steering-architect** - Project analysis and documentation architect
 - **data-scientist** - SQL queries, BigQuery operations, and data analysis
-- **debuger** - Error troubleshooting and root cause analysis
+- **debugger** - Error troubleshooting and root cause analysis
 - **prd-writer** - Product requirements document generation
 
 ### ⚡ Git Workflow Commands
@@ -37,6 +37,8 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 ## 📦 Installation
 
+### Option 1: Clone Repository
+
 1. Clone this repository:
 
 ```bash
@@ -45,6 +47,10 @@ cd claude-marketplace
 ```
 
 2. The plugin will be automatically discovered by Claude Code through `.claude-plugin/marketplace.json`
+
+### Option 2: Manual Installation
+
+Copy the `plugins/devtools/` directory to your Claude Code plugins location and register it in your `.claude-plugin/marketplace.json`
 
 ## 🚀 Quick Start
 
@@ -165,6 +171,9 @@ Each agent has specific tool access for security:
 | task-executor | file_edit, bash, file_search | ✅ Yes |
 | code-reviewer | file_search, bash, file_edit | ✅ Yes |
 | steering-architect | file_edit, file_search, bash | ✅ Yes |
+| data-scientist | bash, file_search, file_edit | ✅ Yes |
+| debugger | file_search, file_edit, bash | ✅ Yes |
+| prd-writer | file_edit, web_search, file_search | ❌ No |
 
 ## 🏗️ Project Structure
 
@@ -172,20 +181,26 @@ Each agent has specific tool access for security:
 claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry
-└── devtools/                     # Main plugin
-    ├── agents/                   # AI agent definitions
-    │   ├── strategic-planner.md
-    │   ├── task-executor.md
-    │   ├── code-reviewer.md
-    │   ├── steering-architect.md
-    │   ├── data-scientist.md
-    │   ├── debuger.md
-    │   └── prd-writer.md
-    ├── commands/                 # Slash commands
-    │   ├── commit/
-    │   ├── pr/
-    │   └── mr/
-    └── hooks/                    # Event hooks
+└── plugins/
+    └── devtools/                 # Main plugin
+        ├── agents/               # AI agent definitions
+        │   ├── code-reviewer.md
+        │   ├── data-scientist.md
+        │   ├── debuger.md
+        │   ├── prd-writer.md
+        │   ├── steering-architect.md
+        │   ├── strategic-planner.md
+        │   └── task-executor.md
+        ├── commands/             # Slash commands
+        │   ├── commit/
+        │   │   └── create.md
+        │   ├── mr/
+        │   │   ├── create.md
+        │   │   └── review.md
+        │   └── pr/
+        │       ├── create.md
+        │       └── review.md
+        └── hooks/                # Event hooks
 ```
 
 ## 🎯 Use Cases
@@ -226,6 +241,8 @@ Several components output in Chinese for the target user base:
 - Code review feedback
 - PR/MR review analysis
 - Agent instructions (bilingual)
+
+**Note:** The debugger agent filename is `debuger.md` (without 'g') while the agent name is `debugger`.
 
 ## 📖 Advanced Usage
 
@@ -269,19 +286,36 @@ specs/
 │   └── tasks.md
 ```
 
+## ⚙️ Configuration
+
+The plugin is registered in `.claude-plugin/marketplace.json`:
+
+```json
+{
+  "plugins": [
+    {
+      "name": "devtools",
+      "source": "./plugins/devtools",
+      "description": "Plugin under development",
+      "category": "development"
+    }
+  ]
+}
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! This repository is designed to be a marketplace for Claude Code plugins.
 
 ### Adding New Agents
 
-1. Create a new `.md` file in `dev-tools/agents/`
+1. Create a new `.md` file in `plugins/devtools/agents/`
 2. Add YAML frontmatter with name, description, and tools
 3. Define agent instructions in markdown
 
 ### Adding New Commands
 
-1. Create a new `.md` file in `dev-tools/commands/<category>/`
+1. Create a new `.md` file in `plugins/devtools/commands/<category>/`
 2. Add YAML frontmatter with allowed-tools and description
 3. Define command prompt with dynamic context
 
