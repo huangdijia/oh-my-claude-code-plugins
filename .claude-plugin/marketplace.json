@@ -1,7 +1,7 @@
 {
-  "name": "huangdijia-claude-code-plugins",
+  "name": "claude-plugins",
   "owner": {
-    "name": "Developer"
+    "name": "Huangdijia"
   },
   "plugins": [
     {
