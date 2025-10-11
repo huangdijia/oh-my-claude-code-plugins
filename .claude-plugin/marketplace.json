@@ -1,11 +1,11 @@
 {
-  "name": "claude-plugins",
+  "name": "claude-code-plugins",
   "owner": {
     "name": "Developer"
   },
   "plugins": [
     {
-      "name": "dev-tools",
+      "name": "devtools",
       "source": "./plugins/dev-tools",
       "description": "Plugin under development",
       "category": "development"
