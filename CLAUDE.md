@@ -8,7 +8,7 @@ This is a Claude Code plugin marketplace repository that provides custom agents 
 
 ## Project Structure
 
-```
+```bash
 claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry configuration
@@ -48,6 +48,7 @@ The plugin is registered via `.claude-plugin/marketplace.json` which defines the
 The repository implements a multi-agent workflow system with three primary phases:
 
 #### Phase 1: Strategic Planning (strategic-planner agent)
+
 - Analyzes requirements and creates technical designs
 - Generates structured specs in `specs/<feature-name>/` directory:
   - `requirements.md` - User stories with EARS-compliant acceptance criteria
@@ -55,6 +56,7 @@ The repository implements a multi-agent workflow system with three primary phase
   - `tasks.md` - Granular task checklist with dependency ordering
 
 #### Phase 2: Task Execution (task-executor agent)
+
 - Implements one atomic task at a time from `tasks.md`
 - Follows strict single-task discipline (surgical precision)
 - Updates task status by marking checkboxes `[ ]` → `[x]`
@@ -62,6 +64,7 @@ The repository implements a multi-agent workflow system with three primary phase
 - Never anticipates future steps or uses new code before instructed
 
 #### Phase 3: Quality Assurance (code-reviewer agent)
+
 - Reviews code quality, security, and maintainability
 - Runs after code changes are made
 - Provides prioritized feedback (critical → warnings → suggestions)
@@ -82,6 +85,7 @@ The repository implements a multi-agent workflow system with three primary phase
 ### Slash Commands
 
 Commands are markdown files with YAML frontmatter defining:
+
 - `allowed-tools`: Restricted tool access for security
 - `description`: Command purpose
 - Dynamic context via shell commands: `!`git status``
@@ -95,6 +99,7 @@ Commands are markdown files with YAML frontmatter defining:
 - `/mr:review` - Review GitLab MRs (Chinese output with optional scope filtering)
 
 The PR/MR review commands support optional parameters:
+
 - `$LANGUAGE` - Target code language
 - `$SCOPE` - Focus area (performance, security, style)
 
@@ -103,6 +108,7 @@ The PR/MR review commands support optional parameters:
 ### Spec-Driven Development
 
 When working on new features:
+
 1. Run strategic-planner to create specs in `specs/<feature-name>/`
 2. Review and approve requirements → design → tasks
 3. Execute tasks one-by-one using task-executor
@@ -112,6 +118,7 @@ When working on new features:
 ### Task Execution Rules
 
 When using task-executor agent:
+
 - Execute exactly one task per iteration
 - Read `.ai-rules/` files for project context
 - Read `specs/<feature>/` files for feature context
@@ -124,6 +131,7 @@ When using task-executor agent:
 ### Agent Tool Restrictions
 
 Each agent has specific tool access defined in frontmatter:
+
 - `strategic-planner`: file_edit, file_search, web_search (NO code execution)
 - `task-executor`: file_edit, bash, file_search
 - `code-reviewer`: file_search, bash, file_edit
