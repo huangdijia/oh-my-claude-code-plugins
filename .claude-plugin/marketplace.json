@@ -1,0 +1,13 @@
+{
+  "name": "claude-plugin-marketplace",
+  "owner": {
+    "name": "Developer"
+  },
+  "plugins": [
+    {
+      "name": "dev-tools",
+      "source": "./dev-tools",
+      "description": "Plugin under development"
+    }
+  ]
+}
