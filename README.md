@@ -37,20 +37,19 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 ## 📦 Installation
 
-### Option 1: Clone Repository
+### Option 1: Install from GitHub
 
-1. Clone this repository:
+1. Run the following command in Claude Code:
 
 ```bash
-git clone https://github.com/huangdijia/claude-marketplace.git
-cd claude-marketplace
+/plugin marketplace add huangdijia/claude-code-plugins
 ```
 
-2. The plugin will be automatically discovered by Claude Code through `.claude-plugin/marketplace.json`
+2. Install the `devtools` plugin:
 
-### Option 2: Manual Installation
-
-Copy the `plugins/devtools/` directory to your Claude Code plugins location and register it in your `.claude-plugin/marketplace.json`
+```bash
+/plugin install devtools@code-plugins
+```
 
 ## 🚀 Quick Start
 
