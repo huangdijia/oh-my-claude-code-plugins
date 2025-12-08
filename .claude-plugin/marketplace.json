@@ -6,21 +6,18 @@
   },
   "plugins": [
     {
-      "name": "devtools",
-      "source": "./plugins/devtools",
+      "name": "ai",
+      "source": "./plugins/ai",
       "description": "Plugin under development",
       "category": "development",
       "agents": [
-        "./plugins/devtools/agents/code-reviewer.md",
-        "./plugins/devtools/agents/data-scientist.md",
-        "./plugins/devtools/agents/debuger.md",
-        "./plugins/devtools/agents/prd-writer.md",
-        "./plugins/devtools/agents/steering-architect.md",
-        "./plugins/devtools/agents/strategic-planner.md",
-        "./plugins/devtools/agents/task-executor.md"
-      ],
-      "mcpServers": [
-        "./plugins/devtools/mcp/servers.json"
+        "./plugins/ai/agents/code-reviewer.md",
+        "./plugins/ai/agents/data-scientist.md",
+        "./plugins/ai/agents/debuger.md",
+        "./plugins/ai/agents/prd-writer.md",
+        "./plugins/ai/agents/steering-architect.md",
+        "./plugins/ai/agents/strategic-planner.md",
+        "./plugins/ai/agents/task-executor.md"
       ]
     },
     {
