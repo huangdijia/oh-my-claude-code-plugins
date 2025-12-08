@@ -45,6 +45,10 @@
         "./plugins/git-flow/commands/mr/review.md",
         "./plugins/git-flow/commands/pr/create.md",
         "./plugins/git-flow/commands/pr/review.md"
+      ],
+      "hooks": [
+        "./plugins/git-flow/hooks/aut-git-add.json",
+        "./plugins/git-flow/hooks/smart-commit.json"
       ]
     },
     {
