@@ -1,10 +1,10 @@
-# Oh My Claude Code Plugins
+# Claude Code Plugins
 
 为 [Claude Code](https://claude.ai/code) 提供强大开发工作流的自定义智能体和斜杠命令精选集合。[英文版](README.md)
 
 ## 🌟 特性
 
-### 🤖 专业 AI 智能体 (ai 插件)
+### 🤖 专业 AI 智能体 (subagents 插件)
 
 **开发工作流智能体：**
 
@@ -208,7 +208,7 @@ claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # 插件注册表
 └── plugins/
-    ├── ai/                       # AI 智能体插件
+    ├── subagents/                # AI 智能体插件
     │   └── agents/               # AI 智能体定义
     │       ├── code-reviewer.md
     │       ├── data-scientist.md
@@ -329,16 +329,16 @@ specs/
 
 ```json
 {
-  "name": "oh-my-claude-code-plugins",
+  "name": "claude-code-plugins",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
   },
   "plugins": [
     {
-      "name": "ai",
-      "source": "./plugins/ai",
-      "description": "Plugin under development",
+      "name": "subagents",
+      "source": "./plugins/subagents",
+      "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
       "category": "development"
     },
     {
@@ -369,7 +369,7 @@ specs/
 
 ### 添加新智能体
 
-1. 在 `plugins/ai/agents/` 中创建新的 `.md` 文件
+1. 在 `plugins/subagents/agents/` 中创建新的 `.md` 文件
 2. 添加包含名称、描述和工具的 YAML 前置元数据
 3. 在 markdown 中定义智能体指令
 

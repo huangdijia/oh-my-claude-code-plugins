@@ -1,10 +1,10 @@
-# Oh My Claude Code Plugins
+# Claude Code Plugins
 
 A curated collection of custom agents and slash commands to enhance [Claude Code](https://claude.ai/code) with powerful development workflows. [中文版](README_CN.md)
 
 ## 🌟 Features
 
-### 🤖 Specialized AI Agents (ai plugin)
+### 🤖 Specialized AI Agents (subagents plugin)
 
 **Development Workflow Agents:**
 
@@ -208,7 +208,7 @@ claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry
 └── plugins/
-    ├── ai/                       # AI agents plugin
+    ├── subagents/                # AI agents plugin
     │   └── agents/               # AI agent definitions
     │       ├── code-reviewer.md
     │       ├── data-scientist.md
@@ -329,16 +329,16 @@ The plugin is registered in `.claude-plugin/marketplace.json`:
 
 ```json
 {
-  "name": "oh-my-claude-code-plugins",
+  "name": "claude-code-plugins",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
   },
   "plugins": [
     {
-      "name": "ai",
-      "source": "./plugins/ai",
-      "description": "Plugin under development",
+      "name": "subagents",
+      "source": "./plugins/subagents",
+      "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
       "category": "development"
     },
     {
@@ -369,7 +369,7 @@ Contributions are welcome! This repository is designed to be a marketplace for C
 
 ### Adding New Agents
 
-1. Create a new `.md` file in `plugins/ai/agents/`
+1. Create a new `.md` file in `plugins/subagents/agents/`
 2. Add YAML frontmatter with name, description, and tools
 3. Define agent instructions in markdown
 
