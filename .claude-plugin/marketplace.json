@@ -8,7 +8,7 @@
     {
       "name": "ai",
       "source": "./plugins/ai",
-      "description": "Plugin under development",
+      "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
       "category": "development",
       "agents": [
         "./plugins/ai/agents/code-reviewer.md",
