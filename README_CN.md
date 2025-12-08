@@ -66,16 +66,16 @@
 1. 在 Claude Code 中运行以下命令：
 
 ```bash
-/plugin marketplace add huangdijia/oh-my-claude-code-plugins
+claude plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
 2. 安装插件：
 
 ```bash
-/plugin install subagents@oh-my-claude-code-plugins
-/plugin install git@oh-my-claude-code-plugins
-/plugin install git-flow@oh-my-claude-code-plugins
-/plugin install mcp@oh-my-claude-code-plugins
+claude plugin install subagents@oh-my-claude-code-plugins
+claude plugin install git@oh-my-claude-code-plugins
+claude plugin install git-flow@oh-my-claude-code-plugins
+claude plugin install mcp@oh-my-claude-code-plugins
 ```
 
 ## 🚀 快速开始

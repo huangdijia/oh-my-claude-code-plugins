@@ -66,16 +66,16 @@ Automated workflows triggered by events:
 1. Run the following command in Claude Code:
 
 ```bash
-/plugin marketplace add huangdijia/oh-my-claude-code-plugins
+claude plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
 2. Install the plugins:
 
 ```bash
-/plugin install subagents@oh-my-claude-code-plugins
-/plugin install git@oh-my-claude-code-plugins
-/plugin install git-flow@oh-my-claude-code-plugins
-/plugin install mcp@oh-my-claude-code-plugins
+claude plugin install subagents@oh-my-claude-code-plugins
+claude plugin install git@oh-my-claude-code-plugins
+claude plugin install git-flow@oh-my-claude-code-plugins
+claude plugin install mcp@oh-my-claude-code-plugins
 ```
 
 ## 🚀 Quick Start
