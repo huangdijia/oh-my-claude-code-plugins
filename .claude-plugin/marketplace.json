@@ -29,6 +29,30 @@
       "mcpServers": [
         "./plugins/devtools/mcp/servers.json"
       ]
+    },
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Enhance your Git experience with Claude's Git plugin for seamless version control.",
+      "category": "development",
+      "commands": [
+        "./plugins/git/commands/feature.md",
+        "./plugins/git/commands/flow-status.md",
+        "./plugins/git/commands/hotfix.md"
+      ]
+    },
+    {
+      "name": "git-flow",
+      "source": "./plugins/gitflow",
+      "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
+      "category": "development",
+      "commands": [
+        "./plugins/git-flow/commands/commit/create.md",
+        "./plugins/git-flow/commands/mr/create.md",
+        "./plugins/git-flow/commands/mr/review.md",
+        "./plugins/git-flow/commands/pr/create.md",
+        "./plugins/git-flow/commands/pr/review.md"
+      ]
     }
   ]
 }
