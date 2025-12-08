@@ -72,7 +72,7 @@
 2. 安装插件：
 
 ```bash
-/plugin install ai@oh-my-claude-code-plugins
+/plugin install subagents@oh-my-claude-code-plugins
 /plugin install git@oh-my-claude-code-plugins
 /plugin install git-flow@oh-my-claude-code-plugins
 /plugin install mcp@oh-my-claude-code-plugins

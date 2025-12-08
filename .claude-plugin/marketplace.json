@@ -6,18 +6,18 @@
   },
   "plugins": [
     {
-      "name": "ai",
-      "source": "./plugins/ai",
+      "name": "subagents",
+      "source": "./plugins/subagents",
       "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
       "category": "development",
       "agents": [
-        "./plugins/ai/agents/code-reviewer.md",
-        "./plugins/ai/agents/data-scientist.md",
-        "./plugins/ai/agents/debuger.md",
-        "./plugins/ai/agents/prd-writer.md",
-        "./plugins/ai/agents/steering-architect.md",
-        "./plugins/ai/agents/strategic-planner.md",
-        "./plugins/ai/agents/task-executor.md"
+        "./plugins/subagents/agents/code-reviewer.md",
+        "./plugins/subagents/agents/data-scientist.md",
+        "./plugins/subagents/agents/debuger.md",
+        "./plugins/subagents/agents/prd-writer.md",
+        "./plugins/subagents/agents/steering-architect.md",
+        "./plugins/subagents/agents/strategic-planner.md",
+        "./plugins/subagents/agents/task-executor.md"
       ]
     },
     {

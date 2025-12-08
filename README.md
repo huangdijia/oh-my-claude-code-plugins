@@ -72,7 +72,7 @@ Automated workflows triggered by events:
 2. Install the plugins:
 
 ```bash
-/plugin install ai@oh-my-claude-code-plugins
+/plugin install subagents@oh-my-claude-code-plugins
 /plugin install git@oh-my-claude-code-plugins
 /plugin install git-flow@oh-my-claude-code-plugins
 /plugin install mcp@oh-my-claude-code-plugins
