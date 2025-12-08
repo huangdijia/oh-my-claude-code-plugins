@@ -9,7 +9,26 @@
       "name": "devtools",
       "source": "./plugins/devtools",
       "description": "Plugin under development",
-      "category": "development"
+      "category": "development",
+      "commands": [
+        "./plugins/devtools/commands/commit/create.md",
+        "./plugins/devtools/commands/mr/create.md",
+        "./plugins/devtools/commands/mr/review.md",
+        "./plugins/devtools/commands/pr/create.md",
+        "./plugins/devtools/commands/pr/review.md"
+      ],
+      "agents": [
+        "./plugins/devtools/agents/code-reviewer.md",
+        "./plugins/devtools/agents/data-scientist.md",
+        "./plugins/devtools/agents/debuger.md",
+        "./plugins/devtools/agents/prd-writer.md",
+        "./plugins/devtools/agents/steering-architect.md",
+        "./plugins/devtools/agents/strategic-planner.md",
+        "./plugins/devtools/agents/task-executor.md"
+      ],
+      "mcpServers": [
+        "./plugins/devtools/mcp/servers.json"
+      ]
     }
   ]
 }
