@@ -1,4 +1,4 @@
-# Claude Code 插件
+# Oh My Claude Code Plugins
 
 为 [Claude Code](https://claude.ai/code) 提供强大开发工作流的自定义智能体和斜杠命令精选集合。[英文版](README.md)
 

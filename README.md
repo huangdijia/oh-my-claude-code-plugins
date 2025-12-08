@@ -1,4 +1,4 @@
-# Claude Code Plugins
+# Oh My Claude Code Plugins
 
 A curated collection of custom agents and slash commands to enhance [Claude Code](https://claude.ai/code) with powerful development workflows.[中文版](README_CN.md)
 
