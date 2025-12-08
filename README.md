@@ -51,6 +51,7 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 /plugin install devtools@oh-my-claude-code-plugins
 /plugin install git@oh-my-claude-code-plugins
 /plugin install git-flow@oh-my-claude-code-plugins
+/plugin install mcp@oh-my-claude-code-plugins
 ```
 
 ## 🚀 Quick Start
