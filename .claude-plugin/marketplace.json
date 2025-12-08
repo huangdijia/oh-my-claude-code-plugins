@@ -36,7 +36,7 @@
     },
     {
       "name": "git-flow",
-      "source": "./plugins/gitflow",
+      "source": "./plugins/git-flow",
       "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
       "category": "development",
       "commands": [
