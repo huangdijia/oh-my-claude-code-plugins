@@ -47,8 +47,8 @@
         "./plugins/git-flow/commands/pr/review.md"
       ],
       "hooks": [
-        "./plugins/git-flow/hooks/aut-git-add.json",
         "./plugins/git-flow/hooks/php-cs-fixer.json",
+        "./plugins/git-flow/hooks/aut-git-add.json",
         "./plugins/git-flow/hooks/smart-commit.json"
       ]
     },
