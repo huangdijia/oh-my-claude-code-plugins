@@ -42,13 +42,13 @@
 1. 在 Claude Code 中运行以下命令：
 
 ```bash
-/plugin marketplace add huangdijia/claude-code-plugins
+/plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
 2. 安装 `devtools` 插件：
 
 ```bash
-/plugin install devtools@code-plugins
+/plugin install devtools@oh-my-claude-code-plugins
 ```
 
 ## 🚀 快速开始
