@@ -49,6 +49,8 @@
 
 ```bash
 /plugin install devtools@oh-my-claude-code-plugins
+/plugin install git@oh-my-claude-code-plugins
+/plugin install git-flow@oh-my-claude-code-plugins
 ```
 
 ## 🚀 快速开始
