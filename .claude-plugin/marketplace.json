@@ -10,13 +10,6 @@
       "source": "./plugins/devtools",
       "description": "Plugin under development",
       "category": "development",
-      "commands": [
-        "./plugins/devtools/commands/commit/create.md",
-        "./plugins/devtools/commands/mr/create.md",
-        "./plugins/devtools/commands/mr/review.md",
-        "./plugins/devtools/commands/pr/create.md",
-        "./plugins/devtools/commands/pr/review.md"
-      ],
       "agents": [
         "./plugins/devtools/agents/code-reviewer.md",
         "./plugins/devtools/agents/data-scientist.md",
