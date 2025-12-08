@@ -46,6 +46,15 @@
         "./plugins/git-flow/commands/pr/create.md",
         "./plugins/git-flow/commands/pr/review.md"
       ]
+    },
+    {
+      "name": "mcp",
+      "source": "./plugins/mcp",
+      "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
+      "category": "development",
+      "mcpServers": [
+        "./plugins/mcp/servers.json"
+      ]
     }
   ]
 }
