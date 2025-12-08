@@ -1,7 +1,8 @@
 {
   "name": "claude-plugins",
   "owner": {
-    "name": "Huangdijia"
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
   },
   "plugins": [
     {

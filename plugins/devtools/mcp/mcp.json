@@ -1,0 +1,48 @@
+{
+    "mcpServers": {
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp"
+            ],
+            "env": {
+                "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+            }
+        },
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {
+                "MEMORY_FILE_PATH": "${CLAUDE_PROJECT_DIR}/.claude/memory.json"
+            }
+        },
+        "tavily-mcp": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "tavily-mcp@latest"
+            ],
+            "env": {
+                "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+            }
+        },
+        "chrome-devtools": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "chrome-devtools-mcp@latest"
+            ]
+        }
+    }
+}
