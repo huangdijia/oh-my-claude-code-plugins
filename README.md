@@ -42,13 +42,13 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 1. Run the following command in Claude Code:
 
 ```bash
-/plugin marketplace add huangdijia/claude-code-plugins
+/plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
 2. Install the `devtools` plugin:
 
 ```bash
-/plugin install devtools@code-plugins
+/plugin install devtools@oh-my-claude-code-plugins
 ```
 
 ## 🚀 Quick Start
