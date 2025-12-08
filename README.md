@@ -1,10 +1,10 @@
 # Oh My Claude Code Plugins
 
-A curated collection of custom agents and slash commands to enhance [Claude Code](https://claude.ai/code) with powerful development workflows.[中文版](README_CN.md)
+A curated collection of custom agents and slash commands to enhance [Claude Code](https://claude.ai/code) with powerful development workflows. [中文版](README_CN.md)
 
 ## 🌟 Features
 
-### 🤖 Specialized AI Agents
+### 🤖 Specialized AI Agents (ai plugin)
 
 **Development Workflow Agents:**
 
@@ -21,19 +21,43 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 ### ⚡ Git Workflow Commands
 
-**GitHub:**
+**Git Flow Branch Management (git plugin):**
 
-- `/devtools:pr:create` - Create Pull Requests with automated branch management
-- `/devtools:pr:review` - Comprehensive PR code review with structured analysis
+- `/git:feature <name>` - Create a new feature branch from develop
+- `/git:hotfix <name>` - Create a new hotfix branch from main
+- `/git:flow-status` - Display comprehensive Git Flow status
 
-**GitLab:**
+**GitHub (git-flow plugin):**
 
-- `/devtools:mr:create` - Create Merge Requests
-- `/devtools:mr:review` - MR review with customizable scope (performance, security, style)
+- `/git-flow:pr:create` - Create Pull Requests with automated branch management
+- `/git-flow:pr:review` - Comprehensive PR code review with structured analysis
 
-**Git:**
+**GitLab (git-flow plugin):**
 
-- `/devtools:commit:create` - Generate semantic commits from staged changes
+- `/git-flow:mr:create` - Create Merge Requests
+- `/git-flow:mr:review` - MR review with customizable scope (performance, security, style)
+
+**Git Commit (git-flow plugin):**
+
+- `/git-flow:commit:create` - Generate semantic commits from staged changes
+
+### 🔌 MCP Servers (mcp plugin)
+
+Pre-configured MCP servers for enhanced capabilities:
+
+- **context7** - Up-to-date documentation retrieval for any library
+- **sequential-thinking** - Structured problem-solving through chain of thought
+- **memory** - Persistent knowledge graph for conversation context
+- **tavily-mcp** - Powerful web search and content extraction
+- **chrome-devtools** - Browser automation and debugging
+
+### 🪝 Git Hooks (git-flow plugin)
+
+Automated workflows triggered by events:
+
+- **php-cs-fixer** - Auto-format PHP files on write/edit
+- **auto-git-add** - Automatically stage modified files
+- **smart-commit** - Intelligent commit message generation
 
 ## 📦 Installation
 
@@ -45,10 +69,10 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 /plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
-2. Install the `devtools` plugin:
+2. Install the plugins:
 
 ```bash
-/plugin install devtools@oh-my-claude-code-plugins
+/plugin install ai@oh-my-claude-code-plugins
 /plugin install git@oh-my-claude-code-plugins
 /plugin install git-flow@oh-my-claude-code-plugins
 /plugin install mcp@oh-my-claude-code-plugins
@@ -102,21 +126,21 @@ Use the code-reviewer agent to review my recent changes
 **Create a commit:**
 
 ```bash
-/devtools:commit:create
+/git-flow:commit:create
 ```
 
 **Create and review PRs:**
 
 ```bash
-/devtools:pr:create
-/devtools:pr:review 123
+/git-flow:pr:create
+/git-flow:pr:review 123
 ```
 
 **Review with specific scope:**
 
 ```bash
-/devtools:mr:review 456 performance
-/devtools:mr:review 789 security
+/git-flow:mr:review 456 performance
+/git-flow:mr:review 789 security
 ```
 
 ## 📚 Documentation
@@ -184,25 +208,36 @@ claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry
 └── plugins/
-    └── devtools/                 # Main plugin
-        ├── agents/               # AI agent definitions
-        │   ├── code-reviewer.md
-        │   ├── data-scientist.md
-        │   ├── debuger.md
-        │   ├── prd-writer.md
-        │   ├── steering-architect.md
-        │   ├── strategic-planner.md
-        │   └── task-executor.md
-        ├── commands/             # Slash commands
-        │   ├── commit/
-        │   │   └── create.md
-        │   ├── mr/
-        │   │   ├── create.md
-        │   │   └── review.md
-        │   └── pr/
-        │       ├── create.md
-        │       └── review.md
-        └── hooks/                # Event hooks
+    ├── ai/                       # AI agents plugin
+    │   └── agents/               # AI agent definitions
+    │       ├── code-reviewer.md
+    │       ├── data-scientist.md
+    │       ├── debuger.md
+    │       ├── prd-writer.md
+    │       ├── steering-architect.md
+    │       ├── strategic-planner.md
+    │       └── task-executor.md
+    ├── git/                      # Git commands plugin
+    │   └── commands/             # Slash commands
+    │       ├── feature.md
+    │       ├── flow-status.md
+    │       └── hotfix.md
+    ├── git-flow/                 # Git Flow automation plugin
+    │   ├── commands/             # Slash commands
+    │   │   ├── commit/
+    │   │   │   └── create.md
+    │   │   ├── mr/
+    │   │   │   ├── create.md
+    │   │   │   └── review.md
+    │   │   └── pr/
+    │   │       ├── create.md
+    │   │       └── review.md
+    │   └── hooks/                # Event hooks
+    │       ├── aut-git-add.json
+    │       ├── php-cs-fixer.json
+    │       └── smart-commit.json
+    └── mcp/                      # MCP servers plugin
+        └── servers.json
 ```
 
 ## 🎯 Use Cases
@@ -219,7 +254,7 @@ claude-marketplace/
 
 ```bash
 # Automated PR review with security focus
-/devtools:pr:review 123 security
+/git-flow:pr:review 123 security
 ```
 
 ### Project Setup
@@ -267,9 +302,9 @@ The agent will:
 Focus code reviews on specific aspects:
 
 ```bash
-/devtools:pr:review 123 performance    # Focus on performance issues
-/devtools:pr:review 456 security       # Focus on security vulnerabilities
-/devtools:pr:review 789 style          # Focus on code style and conventions
+/git-flow:pr:review 123 performance    # Focus on performance issues
+/git-flow:pr:review 456 security       # Focus on security vulnerabilities
+/git-flow:pr:review 789 style          # Focus on code style and conventions
 ```
 
 ### Spec Management
@@ -294,11 +329,34 @@ The plugin is registered in `.claude-plugin/marketplace.json`:
 
 ```json
 {
+  "name": "oh-my-claude-code-plugins",
+  "owner": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  },
   "plugins": [
     {
-      "name": "devtools",
-      "source": "./plugins/devtools",
+      "name": "ai",
+      "source": "./plugins/ai",
       "description": "Plugin under development",
+      "category": "development"
+    },
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Enhance your Git experience with Claude's Git plugin for seamless version control.",
+      "category": "development"
+    },
+    {
+      "name": "git-flow",
+      "source": "./plugins/git-flow",
+      "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
+      "category": "development"
+    },
+    {
+      "name": "mcp",
+      "source": "./plugins/mcp",
+      "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
       "category": "development"
     }
   ]
@@ -311,15 +369,22 @@ Contributions are welcome! This repository is designed to be a marketplace for C
 
 ### Adding New Agents
 
-1. Create a new `.md` file in `plugins/devtools/agents/`
+1. Create a new `.md` file in `plugins/ai/agents/`
 2. Add YAML frontmatter with name, description, and tools
 3. Define agent instructions in markdown
 
 ### Adding New Commands
 
-1. Create a new `.md` file in `plugins/devtools/commands/<category>/`
+1. Create a new `.md` file in appropriate plugin directory:
+   - `plugins/git/commands/` for git commands
+   - `plugins/git-flow/commands/` for git-flow commands
 2. Add YAML frontmatter with allowed-tools and description
 3. Define command prompt with dynamic context
+
+### Adding New Hooks
+
+1. Create a new `.json` file in `plugins/git-flow/hooks/`
+2. Configure the hook event and command to execute
 
 ## 📄 License
 

@@ -4,7 +4,7 @@
 
 ## 🌟 特性
 
-### 🤖 专业 AI 智能体
+### 🤖 专业 AI 智能体 (ai 插件)
 
 **开发工作流智能体：**
 
@@ -21,19 +21,43 @@
 
 ### ⚡ Git 工作流命令
 
-**GitHub：**
+**Git Flow 分支管理 (git 插件)：**
 
-- `/devtools:pr:create` - 创建 Pull Request，支持自动分支管理
-- `/devtools:pr:review` - 全面的 PR 代码审查，提供结构化分析
+- `/git:feature <name>` - 从 develop 创建新功能分支
+- `/git:hotfix <name>` - 从 main 创建热修复分支
+- `/git:flow-status` - 显示完整的 Git Flow 状态
 
-**GitLab：**
+**GitHub (git-flow 插件)：**
 
-- `/devtools:mr:create` - 创建 Merge Request
-- `/devtools:mr:review` - MR 审查，支持自定义范围（性能、安全、风格）
+- `/git-flow:pr:create` - 创建 Pull Request，支持自动分支管理
+- `/git-flow:pr:review` - 全面的 PR 代码审查，提供结构化分析
 
-**Git：**
+**GitLab (git-flow 插件)：**
 
-- `/devtools:commit:create` - 根据暂存更改生成语义化提交
+- `/git-flow:mr:create` - 创建 Merge Request
+- `/git-flow:mr:review` - MR 审查，支持自定义范围（性能、安全、风格）
+
+**Git 提交 (git-flow 插件)：**
+
+- `/git-flow:commit:create` - 根据暂存更改生成语义化提交
+
+### 🔌 MCP 服务器 (mcp 插件)
+
+预配置的 MCP 服务器，提供增强功能：
+
+- **context7** - 获取任何库的最新文档
+- **sequential-thinking** - 通过思维链进行结构化问题解决
+- **memory** - 持久化知识图，用于对话上下文
+- **tavily-mcp** - 强大的网络搜索和内容提取
+- **chrome-devtools** - 浏览器自动化和调试
+
+### 🪝 Git 钩子 (git-flow 插件)
+
+事件触发的自动化工作流：
+
+- **php-cs-fixer** - 写入/编辑时自动格式化 PHP 文件
+- **auto-git-add** - 自动暂存修改的文件
+- **smart-commit** - 智能提交消息生成
 
 ## 📦 安装
 
@@ -45,10 +69,10 @@
 /plugin marketplace add huangdijia/oh-my-claude-code-plugins
 ```
 
-2. 安装 `devtools` 插件：
+2. 安装插件：
 
 ```bash
-/plugin install devtools@oh-my-claude-code-plugins
+/plugin install ai@oh-my-claude-code-plugins
 /plugin install git@oh-my-claude-code-plugins
 /plugin install git-flow@oh-my-claude-code-plugins
 /plugin install mcp@oh-my-claude-code-plugins
@@ -102,21 +126,21 @@
 **创建提交：**
 
 ```bash
-/devtools:commit:create
+/git-flow:commit:create
 ```
 
 **创建和审查 PR：**
 
 ```bash
-/devtools:pr:create
-/devtools:pr:review 123
+/git-flow:pr:create
+/git-flow:pr:review 123
 ```
 
 **指定范围的审查：**
 
 ```bash
-/devtools:mr:review 456 performance
-/devtools:mr:review 789 security
+/git-flow:mr:review 456 performance
+/git-flow:mr:review 789 security
 ```
 
 ## 📚 文档
@@ -184,25 +208,36 @@ claude-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json          # 插件注册表
 └── plugins/
-    └── devtools/                 # 主插件
-        ├── agents/               # AI 智能体定义
-        │   ├── code-reviewer.md
-        │   ├── data-scientist.md
-        │   ├── debuger.md
-        │   ├── prd-writer.md
-        │   ├── steering-architect.md
-        │   ├── strategic-planner.md
-        │   └── task-executor.md
-        ├── commands/             # 斜杠命令
-        │   ├── commit/
-        │   │   └── create.md
-        │   ├── mr/
-        │   │   ├── create.md
-        │   │   └── review.md
-        │   └── pr/
-        │       ├── create.md
-        │       └── review.md
-        └── hooks/                # 事件钩子
+    ├── ai/                       # AI 智能体插件
+    │   └── agents/               # AI 智能体定义
+    │       ├── code-reviewer.md
+    │       ├── data-scientist.md
+    │       ├── debuger.md
+    │       ├── prd-writer.md
+    │       ├── steering-architect.md
+    │       ├── strategic-planner.md
+    │       └── task-executor.md
+    ├── git/                      # Git 命令插件
+    │   └── commands/             # 斜杠命令
+    │       ├── feature.md
+    │       ├── flow-status.md
+    │       └── hotfix.md
+    ├── git-flow/                 # Git Flow 自动化插件
+    │   ├── commands/             # 斜杠命令
+    │   │   ├── commit/
+    │   │   │   └── create.md
+    │   │   ├── mr/
+    │   │   │   ├── create.md
+    │   │   │   └── review.md
+    │   │   └── pr/
+    │   │       ├── create.md
+    │   │       └── review.md
+    │   └── hooks/                # 事件钩子
+    │       ├── aut-git-add.json
+    │       ├── php-cs-fixer.json
+    │       └── smart-commit.json
+    └── mcp/                      # MCP 服务器插件
+        └── servers.json
 ```
 
 ## 🎯 使用场景
@@ -219,7 +254,7 @@ claude-marketplace/
 
 ```bash
 # 专注于安全的自动化 PR 审查
-/devtools:pr:review 123 security
+/git-flow:pr:review 123 security
 ```
 
 ### 项目设置
@@ -267,9 +302,9 @@ claude-marketplace/
 将代码审查聚焦于特定方面：
 
 ```bash
-/devtools:pr:review 123 performance    # 关注性能问题
-/devtools:pr:review 456 security       # 关注安全漏洞
-/devtools:pr:review 789 style          # 关注代码风格和约定
+/git-flow:pr:review 123 performance    # 关注性能问题
+/git-flow:pr:review 456 security       # 关注安全漏洞
+/git-flow:pr:review 789 style          # 关注代码风格和约定
 ```
 
 ### 规范管理
@@ -294,11 +329,34 @@ specs/
 
 ```json
 {
+  "name": "oh-my-claude-code-plugins",
+  "owner": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  },
   "plugins": [
     {
-      "name": "devtools",
-      "source": "./plugins/devtools",
+      "name": "ai",
+      "source": "./plugins/ai",
       "description": "Plugin under development",
+      "category": "development"
+    },
+    {
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "Enhance your Git experience with Claude's Git plugin for seamless version control.",
+      "category": "development"
+    },
+    {
+      "name": "git-flow",
+      "source": "./plugins/git-flow",
+      "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
+      "category": "development"
+    },
+    {
+      "name": "mcp",
+      "source": "./plugins/mcp",
+      "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
       "category": "development"
     }
   ]
@@ -311,15 +369,22 @@ specs/
 
 ### 添加新智能体
 
-1. 在 `plugins/devtools/agents/` 中创建新的 `.md` 文件
+1. 在 `plugins/ai/agents/` 中创建新的 `.md` 文件
 2. 添加包含名称、描述和工具的 YAML 前置元数据
 3. 在 markdown 中定义智能体指令
 
 ### 添加新命令
 
-1. 在 `plugins/devtools/commands/<类别>/` 中创建新的 `.md` 文件
+1. 在相应的插件目录中创建新的 `.md` 文件：
+   - `plugins/git/commands/` 用于 git 命令
+   - `plugins/git-flow/commands/` 用于 git-flow 命令
 2. 添加包含 allowed-tools 和描述的 YAML 前置元数据
 3. 使用动态上下文定义命令提示
+
+### 添加新钩子
+
+1. 在 `plugins/git-flow/hooks/` 中创建新的 `.json` 文件
+2. 配置钩子事件和要执行的命令
 
 ## 📄 许可证
 
