@@ -1,4 +1,5 @@
 {
+  "description": "Run PHP-CS-Fixer on PHP files after they are written or edited.",
   "hooks": {
     "PostToolUse": [
       {
