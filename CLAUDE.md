@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a collection of Claude Code plugins organized as a marketplace. The project provides custom AI agents, Git workflow commands, and MCP server configurations to enhance development workflows.
+This is a collection of Claude Code plugins organized as a marketplace. The project provides custom AI agents, Git workflow commands, MCP server configurations, and specialized development skills to enhance development workflows.
 
 ## Architecture
 
@@ -19,7 +19,8 @@ oh-my-claude-code-plugins/
     ├── subagents/                    # AI agent definitions
     ├── git/                         # Git workflow commands
     ├── git-flow/                    # Git Flow automation
-    └── mcp/                         # MCP server configurations
+    ├── mcp/                         # MCP server configurations
+    └── skills/                      # Development skills
 ```
 
 ### Plugin Components
@@ -28,6 +29,7 @@ oh-my-claude-code-plugins/
 2. **Commands** (`plugins/*/commands/`): Slash commands with YAML frontmatter defining permissions and arguments
 3. **Hooks** (`plugins/git-flow/hooks/`): Event-driven automation triggers
 4. **MCP Servers** (`plugins/mcp/servers.json`): External service integrations
+5. **Skills** (`plugins/skills/*/`): Specialized development workflows and capabilities
 
 ### Agent Architecture
 
@@ -67,6 +69,7 @@ claude plugin install subagents@oh-my-claude-code-plugins
 claude plugin install git@oh-my-claude-code-plugins
 claude plugin install git-flow@oh-my-claude-code-plugins
 claude plugin install mcp@oh-my-claude-code-plugins
+claude plugin install skills@oh-my-claude-code-plugins
 ```
 
 ### Using the Plugins
@@ -82,6 +85,12 @@ Use the task-executor agent to implement the next task from specs/[feature]/task
 
 # Code review
 Use the code-reviewer agent to review my recent changes
+
+# Feature development skill
+Use the feature-dev skill to help me implement [feature]
+
+# Code review skill
+Use the code-review skill to review my recent changes
 ```
 
 **Git Commands:**
@@ -148,7 +157,7 @@ Hooks are JSON files with:
 
 ### File Naming Quirks
 
-- Note: `debuger.md` (missing 'g') vs agent name `debugger`
+- Note: The debugger agent filename has been corrected from `debuger.md` to `debugger.md`
 - Hook reference in marketplace has typo: `aut-git-add.json` vs `auto-git-add.json`
 
 ### Git Flow Integration

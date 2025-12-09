@@ -51,6 +51,13 @@ Pre-configured MCP servers for enhanced capabilities:
 - **tavily-mcp** - Powerful web search and content extraction
 - **chrome-devtools** - Browser automation and debugging
 
+### 🛠️ Development Skills (skills plugin)
+
+Specialized skills for specific development workflows:
+
+- **feature-dev** - Guided feature development with codebase understanding and architecture focus
+- **code-review** - Advanced code review capabilities for quality, security, and maintainability
+
 ### 🪝 Git Hooks (git-flow plugin)
 
 Automated workflows triggered by events:
@@ -76,6 +83,7 @@ claude plugin install subagents@oh-my-claude-code-plugins
 claude plugin install git@oh-my-claude-code-plugins
 claude plugin install git-flow@oh-my-claude-code-plugins
 claude plugin install mcp@oh-my-claude-code-plugins
+claude plugin install skills@oh-my-claude-code-plugins
 ```
 
 ## 🚀 Quick Start
@@ -119,6 +127,20 @@ Automated quality assurance:
 
 ```bash
 Use the code-reviewer agent to review my recent changes
+```
+
+### Using Development Skills
+
+**Feature Development:**
+
+```markdown
+Use the feature-dev skill to help me implement a user authentication system
+```
+
+**Code Review:**
+
+```markdown
+Use the code-review skill to review my recent changes
 ```
 
 ### Using Slash Commands
@@ -212,7 +234,7 @@ claude-marketplace/
     │   └── agents/               # AI agent definitions
     │       ├── code-reviewer.md
     │       ├── data-scientist.md
-    │       ├── debuger.md
+    │       ├── debugger.md
     │       ├── prd-writer.md
     │       ├── steering-architect.md
     │       ├── strategic-planner.md
@@ -229,15 +251,21 @@ claude-marketplace/
     │   │   ├── mr/
     │   │   │   ├── create.md
     │   │   │   └── review.md
-    │   │   └── pr/
-    │   │       ├── create.md
-    │   │       └── review.md
+    │   │   ├── pr/
+    │   │   │   ├── create.md
+    │   │   │   └── review.md
+    │   │   └── status.md
     │   └── hooks/                # Event hooks
     │       ├── auto-git-add.json
     │       ├── php-cs-fixer.json
     │       └── smart-commit.json
-    └── mcp/                      # MCP servers plugin
-        └── servers.json
+    ├── mcp/                      # MCP servers plugin
+    │   └── servers.json
+    └── skills/                   # Development skills plugin
+        ├── code-review/
+        │   └── SKILL.md
+        └── feature-dev/
+            └── SKILL.md
 ```
 
 ## 🎯 Use Cases
@@ -279,7 +307,7 @@ Several components output in Chinese for the target user base:
 - PR/MR review analysis
 - Agent instructions (bilingual)
 
-**Note:** The debugger agent filename is `debuger.md` (without 'g') while the agent name is `debugger`.
+**Note:** The debugger agent filename is `debugger.md` (with 'g') - the previous typo has been fixed.
 
 ## 📖 Advanced Usage
 
@@ -357,6 +385,12 @@ The plugin is registered in `.claude-plugin/marketplace.json`:
       "name": "mcp",
       "source": "./plugins/mcp",
       "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
+      "category": "development"
+    },
+    {
+      "name": "skills",
+      "source": "./plugins/skills",
+      "description": "Specialized development skills for feature development and code review workflows.",
       "category": "development"
     }
   ]

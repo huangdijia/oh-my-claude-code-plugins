@@ -51,6 +51,13 @@
 - **tavily-mcp** - 强大的网络搜索和内容提取
 - **chrome-devtools** - 浏览器自动化和调试
 
+### 🛠️ 开发技能 (skills 插件)
+
+针对特定开发工作流的专业技能：
+
+- **feature-dev** - 指导功能开发，专注代码库理解和架构
+- **code-review** - 高级代码审查功能，确保质量、安全性和可维护性
+
 ### 🪝 Git 钩子 (git-flow 插件)
 
 事件触发的自动化工作流：
@@ -76,6 +83,7 @@ claude plugin install subagents@oh-my-claude-code-plugins
 claude plugin install git@oh-my-claude-code-plugins
 claude plugin install git-flow@oh-my-claude-code-plugins
 claude plugin install mcp@oh-my-claude-code-plugins
+claude plugin install skills@oh-my-claude-code-plugins
 ```
 
 ## 🚀 快速开始
@@ -119,6 +127,20 @@ claude plugin install mcp@oh-my-claude-code-plugins
 
 ```bash
 使用 code-reviewer 智能体审查我的最近更改
+```
+
+### 使用开发技能
+
+**功能开发：**
+
+```markdown
+使用 feature-dev 技能帮我实现用户认证系统
+```
+
+**代码审查：**
+
+```markdown
+使用 code-review 技能审查我的最近更改
 ```
 
 ### 使用斜杠命令
@@ -212,7 +234,7 @@ claude-marketplace/
     │   └── agents/               # AI 智能体定义
     │       ├── code-reviewer.md
     │       ├── data-scientist.md
-    │       ├── debuger.md
+    │       ├── debugger.md
     │       ├── prd-writer.md
     │       ├── steering-architect.md
     │       ├── strategic-planner.md
@@ -229,15 +251,21 @@ claude-marketplace/
     │   │   ├── mr/
     │   │   │   ├── create.md
     │   │   │   └── review.md
-    │   │   └── pr/
-    │   │       ├── create.md
-    │   │       └── review.md
+    │   │   ├── pr/
+    │   │   │   ├── create.md
+    │   │   │   └── review.md
+    │   │   └── status.md
     │   └── hooks/                # 事件钩子
     │       ├── auto-git-add.json
     │       ├── php-cs-fixer.json
     │       └── smart-commit.json
-    └── mcp/                      # MCP 服务器插件
-        └── servers.json
+    ├── mcp/                      # MCP 服务器插件
+    │   └── servers.json
+    └── skills/                   # 开发技能插件
+        ├── code-review/
+        │   └── SKILL.md
+        └── feature-dev/
+            └── SKILL.md
 ```
 
 ## 🎯 使用场景
@@ -279,7 +307,7 @@ claude-marketplace/
 - PR/MR 审查分析
 - 智能体指令（双语）
 
-**注意：** debugger 智能体的文件名是 `debuger.md`（没有 'g'），而智能体名称是 `debugger`。
+**注意：** debugger 智能体的文件名已修正为 `debugger.md`（包含 'g'），之前的拼写错误已修复。
 
 ## 📖 高级用法
 
@@ -357,6 +385,12 @@ specs/
       "name": "mcp",
       "source": "./plugins/mcp",
       "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
+      "category": "development"
+    },
+    {
+      "name": "skills",
+      "source": "./plugins/skills",
+      "description": "Specialized development skills for feature development and code review workflows.",
       "category": "development"
     }
   ]
