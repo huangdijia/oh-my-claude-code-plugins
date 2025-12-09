@@ -2,7 +2,11 @@
   "name": "git",
   "version": "1.0.0",
   "description": "Enhanced Git commands for better version control workflow",
-  "author": "Deeka Wong",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com",
+    "url": "https://github.com/huangdijia"
+  },
   "license": "MIT",
   "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/git",
   "keywords": [
@@ -11,18 +15,9 @@
     "workflow",
     "branching"
   ],
-  "category": "development",
-  "engines": {
-    "claude-code": ">=0.1.0"
-  },
   "commands": [
-    "git:feature",
-    "git:hotfix",
-    "git:flow-status"
-  ],
-  "capabilities": [
-    "Git Flow branch creation",
-    "Repository status monitoring",
-    "Hotfix management"
+    "./commands/feature.md",
+    "./commands/hotfix.md",
+    "./commands/flow-status.md"
   ]
 }

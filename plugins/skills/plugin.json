@@ -2,7 +2,11 @@
   "name": "skills",
   "version": "1.0.0",
   "description": "Claude Code Skills for specialized development workflows",
-  "author": "Deeka Wong",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com",
+    "url": "https://github.com/huangdijia"
+  },
   "license": "MIT",
   "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/skills",
   "keywords": [
@@ -11,28 +15,8 @@
     "expertise",
     "specialization"
   ],
-  "category": "development",
-  "engines": {
-    "claude-code": ">=0.1.0"
-  },
   "skills": [
-    {
-      "name": "feature-dev",
-      "description": "Comprehensive feature development workflow",
-      "path": "./feature-dev/SKILL.md",
-      "tags": ["development", "planning", "implementation", "testing"]
-    },
-    {
-      "name": "code-review",
-      "description": "Enhanced code review capabilities",
-      "path": "./code-review/SKILL.md",
-      "tags": ["review", "quality", "security", "best-practices"]
-    }
-  ],
-  "capabilities": [
-    "Feature development guidance",
-    "Code review automation",
-    "Best practices enforcement",
-    "Workflow optimization"
+    "./feature-dev/SKILL.md",
+    "./code-review/SKILL.md"
   ]
 }

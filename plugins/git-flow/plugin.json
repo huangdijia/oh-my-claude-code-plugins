@@ -2,7 +2,11 @@
   "name": "git-flow",
   "version": "1.0.0",
   "description": "Comprehensive Git Flow automation with hooks and commands",
-  "author": "Deeka Wong",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com",
+    "url": "https://github.com/huangdijia"
+  },
   "license": "MIT",
   "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/git-flow",
   "keywords": [
@@ -12,26 +16,16 @@
     "ci-cd",
     "workflow"
   ],
-  "category": "development",
-  "engines": {
-    "claude-code": ">=0.1.0"
-  },
   "commands": [
-    "git-flow:commit:create",
-    "git-flow:pr:create",
-    "git-flow:pr:review",
-    "git-flow:mr:create",
-    "git-flow:mr:review"
+    "./commands/commit-create.md",
+    "./commands/pr-create.md",
+    "./commands/pr-review.md",
+    "./commands/mr-create.md",
+    "./commands/mr-review.md"
   ],
   "hooks": [
-    "auto-git-add",
-    "php-cs-fixer",
-    "smart-commit"
-  ],
-  "capabilities": [
-    "Automated commit generation",
-    "Pull/MR creation",
-    "Code review automation",
-    "Git hooks integration"
+    "./hooks/auto-git-add.json",
+    "./hooks/php-cs-fixer.json",
+    "./hooks/smart-commit.json"
   ]
 }
