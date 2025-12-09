@@ -25,7 +25,7 @@
 
 - No automated suite; rely on manual checks.
 - Validate JSON/YAML with `jq` or `yq eval .`.
-- After edits, install the updated plugin in Claude Code and run a representative command (e.g., `/git:flow-status`, `/git-flow:pr:create`, `Use the feature-dev skill to help me`, `Use the code-review skill to review my changes`) to confirm prompts and tool scopes.
+- After edits, install the updated plugin in Claude Code and run a representative command (e.g., `/git-flow:status`, `/git-flow:pr:create`, `Use the feature-dev skill to help me`, `Use the code-review skill to review my changes`) to confirm prompts and tool scopes.
 - Note manual test steps and outcomes in PRs.
 
 ## Commit & Pull Request Guidelines

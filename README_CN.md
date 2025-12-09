@@ -25,7 +25,7 @@
 
 - `/git:feature <name>` - 从 develop 创建新功能分支
 - `/git:hotfix <name>` - 从 main 创建热修复分支
-- `/git:flow-status` - 显示完整的 Git Flow 状态
+- `/git-flow:status` - 显示完整的 Git Flow 状态
 
 **GitHub (git-flow 插件)：**
 

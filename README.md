@@ -25,7 +25,7 @@ A curated collection of custom agents and slash commands to enhance [Claude Code
 
 - `/git:feature <name>` - Create a new feature branch from develop
 - `/git:hotfix <name>` - Create a new hotfix branch from main
-- `/git:flow-status` - Display comprehensive Git Flow status
+- `/git-flow:status` - Display comprehensive Git Flow status
 
 **GitHub (git-flow plugin):**
 

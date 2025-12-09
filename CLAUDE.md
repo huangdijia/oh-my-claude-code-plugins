@@ -98,7 +98,7 @@ Use the code-review skill to review my recent changes
 ```bash
 /git:feature <name>          # Create feature branch
 /git:hotfix <name>          # Create hotfix branch
-/git:flow-status            # Check Git Flow status
+/git-flow:status            # Check Git Flow status
 ```
 
 **Git Flow Automation:**
