@@ -22,8 +22,8 @@ jobs:
 
     - name: Install Claude Code CLI
       run: |
-        curl -fsSL https://claude.ai/install.sh | sh
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        chmod +x .github/scripts/install-claude.sh
+        .github/scripts/install-claude.sh
 
     - name: Install required tools
       run: |
