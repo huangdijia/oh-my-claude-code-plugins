@@ -53,6 +53,7 @@ This skill provides expertise in:
 ## Integration
 
 This skill works best with:
+
 - `task-executor` agent for implementation
 - `code-reviewer` agent for quality checks
 - `debugger` agent for troubleshooting

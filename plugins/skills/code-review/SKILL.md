@@ -11,24 +11,28 @@ Use the code-review skill to review my recent changes
 ## Review Areas
 
 ### 1. Code Quality
+
 - Readability and clarity
 - Adherence to coding standards
 - Proper error handling
 - Resource management
 
 ### 2. Security
+
 - Input validation
 - Authentication/authorization
 - Data exposure risks
 - Dependency vulnerabilities
 
 ### 3. Performance
+
 - Algorithm efficiency
 - Memory usage
 - Database queries
 - Caching opportunities
 
 ### 4. Architecture
+
 - SOLID principles
 - Design patterns
 - Coupling and cohesion
@@ -63,6 +67,7 @@ Before submitting a review, ensure:
 ## Integration
 
 Works seamlessly with:
+
 - `code-reviewer` agent for automated reviews
 - Git hooks for pre-commit checks
 - CI/CD pipelines for automated validation
