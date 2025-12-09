@@ -4,7 +4,7 @@
 set -e
 
 VERSION="$1"
-ARCHIVE_NAME="claude-code-plugins-${VERSION#v}"
+ARCHIVE_NAME="oh-my-claude-code-plugins-${VERSION#v}"
 
 if [[ -z "$VERSION" ]]; then
     echo "Error: VERSION parameter is required"
