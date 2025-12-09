@@ -166,6 +166,7 @@ jobs:
         cat /tmp/release_notes.md
 
     - name: Create Release
+      id: create_release
       if: github.event.inputs.dry_run != 'true'
       uses: actions/create-release@v1
       env:
@@ -192,6 +193,10 @@ jobs:
         if [[ -f "${ARCHIVE_NAME}.tar.gz" ]]; then
           echo "✅ Archive created successfully"
           echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+
+          if [[ "${{ github.event.inputs.dry_run }}" == "true" ]]; then
+            echo "Dry run mode - archive created locally"
+          fi
         else
           echo "❌ Archive creation failed"
           exit 1
@@ -218,6 +223,14 @@ jobs:
         asset_path: ./claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz
         asset_name: claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz
         asset_content_type: application/gzip
+
+    - name: Dry Run - Show Archive Info
+      if: github.event.inputs.dry_run == 'true'
+      run: |
+        echo "🔍 DRY RUN - Archive created but not uploaded"
+        echo "Archive would be uploaded to release: ${{ steps.version.outputs.version }}"
+        echo "Archive file: ./claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz"
+        ls -lh ./claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz
 
     - name: Notify Marketplace
       if: github.event.inputs.dry_run != 'true'
