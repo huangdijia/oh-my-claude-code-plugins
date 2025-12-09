@@ -213,7 +213,7 @@ tail -f ~/.claude/logs/claude.log
 
 If issues persist:
 
-1. Check [GitHub Issues](https://github.com/huangdijia/claude-code-plugins/issues)
+1. Check [GitHub Issues](https://github.com/huangdijia/oh-my-claude-code-plugins/issues)
 2. Create new issue with:
    - Claude Code version
    - Plugin version

@@ -1,29 +1,27 @@
 {
   "name": "oh-my-claude-code-plugins",
-  "metadata": {
-    "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
-    "version": "1.0.0",
-    "homepage": "https://github.com/huangdijia/claude-code-plugins",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/huangdijia/claude-code-plugins.git"
-    },
-    "license": "MIT",
-    "keywords": [
-      "claude-code",
-      "plugins",
-      "ai-agents",
-      "git-workflow",
-      "mcp",
-      "development-tools",
-      "automation"
-    ],
-    "category": "development"
-  },
+  "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
+  "version": "1.0.0",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
   },
+  "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huangdijia/oh-my-claude-code-plugins.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "plugins",
+    "ai-agents",
+    "git-workflow",
+    "mcp",
+    "development-tools",
+    "automation"
+  ],
+  "category": "development",
   "plugins": [
     {
       "name": "subagents",

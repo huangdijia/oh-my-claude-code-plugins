@@ -8,7 +8,7 @@ Thank you for your interest in contributing to this project! This guide will hel
 
 If you find a bug or have a suggestion:
 
-1. Check existing [issues](https://github.com/huangdijia/claude-code-plugins/issues)
+1. Check existing [issues](https://github.com/huangdijia/oh-my-claude-code-plugins/issues)
 2. Create a new issue with:
    - Clear title and description
    - Steps to reproduce (for bugs)
@@ -25,7 +25,7 @@ If you find a bug or have a suggestion:
    ```
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/huangdijia/claude-code-plugins.git
+   git remote add upstream https://github.com/huangdijia/oh-my-claude-code-plugins.git
    ```
 4. Create a feature branch:
    ```bash

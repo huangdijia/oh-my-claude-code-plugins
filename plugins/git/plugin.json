@@ -4,7 +4,7 @@
   "description": "Enhanced Git commands for better version control workflow",
   "author": "Deeka Wong",
   "license": "MIT",
-  "homepage": "https://github.com/huangdijia/claude-code-plugins/tree/main/plugins/git",
+  "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/git",
   "keywords": [
     "git",
     "version-control",

@@ -4,7 +4,7 @@
   "description": "Comprehensive Git Flow automation with hooks and commands",
   "author": "Deeka Wong",
   "license": "MIT",
-  "homepage": "https://github.com/huangdijia/claude-code-plugins/tree/main/plugins/git-flow",
+  "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/git-flow",
   "keywords": [
     "git-flow",
     "automation",
