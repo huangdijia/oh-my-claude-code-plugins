@@ -1,0 +1,41 @@
+{
+  "name": "mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server integrations for enhanced capabilities",
+  "author": "Deeka Wong",
+  "license": "MIT",
+  "homepage": "https://github.com/huangdijia/claude-code-plugins/tree/main/plugins/mcp",
+  "keywords": [
+    "mcp",
+    "context-protocol",
+    "integrations",
+    "external-services"
+  ],
+  "category": "development",
+  "engines": {
+    "claude-code": ">=0.1.0"
+  },
+  "mcpServers": [
+    "context7",
+    "sequential-thinking",
+    "memory",
+    "tavily-mcp",
+    "chrome-devtools"
+  ],
+  "environment": {
+    "required": [
+      "CONTEXT7_API_KEY",
+      "TAVILY_API_KEY"
+    ],
+    "optional": [
+      "MEMORY_FILE_PATH"
+    ]
+  },
+  "capabilities": [
+    "Documentation retrieval",
+    "Web search",
+    "Memory management",
+    "Browser automation",
+    "Sequential thinking"
+  ]
+}

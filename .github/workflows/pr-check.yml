@@ -1,0 +1,190 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: PR Validation
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Claude Code CLI
+      run: |
+        curl -fsSL https://claude.ai/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Validate Plugin Configuration
+      run: |
+        claude plugin validate .
+
+    - name: Check for Breaking Changes
+      run: |
+        echo "Checking for breaking changes..."
+
+        # Get changed files
+        CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+        # Check if marketplace.json changed
+        if echo "$CHANGED_FILES" | grep -q "marketplace.json"; then
+          echo "⚠️ marketplace.json has changed - review carefully"
+        fi
+
+        # Check if any plugin.json files changed
+        if echo "$CHANGED_FILES" | grep -q "plugin.json"; then
+          echo "⚠️ Plugin metadata has changed - verify compatibility"
+        fi
+
+        # Check if agent files were removed
+        REMOVED_AGENTS=$(git diff --name-status origin/${{ github.base_ref }}...HEAD | grep "^D.*agents/.*\.md$" || true)
+        if [ -n "$REMOVED_AGENTS" ]; then
+          echo "❌ Agents were removed:"
+          echo "$REMOVED_AGENTS"
+          echo "This may be a breaking change!"
+          exit 1
+        fi
+
+    - name: Validate Plugin Dependencies
+      run: |
+        echo "Checking plugin dependencies..."
+
+        # Extract plugin names from marketplace.json
+        PLUGINS=$(jq -r '.plugins[].name' .claude-plugin/marketplace.json)
+
+        for plugin in $PLUGINS; do
+          echo "Checking plugin: $plugin"
+
+          # Check plugin directory exists
+          if [ ! -d "plugins/$plugin" ]; then
+            echo "❌ Plugin directory missing: plugins/$plugin"
+            exit 1
+          fi
+
+          # Check plugin.json exists
+          if [ ! -f "plugins/$plugin/plugin.json" ]; then
+            echo "❌ plugin.json missing for: $plugin"
+            exit 1
+          fi
+
+          # Validate sources in marketplace.json match actual files
+          SOURCES=$(jq -r ".plugins[] | select(.name==\"$plugin\") | .agents[], .commands[], .hooks[], .mcpServers[], .skills[]" .claude-plugin/marketplace.json 2>/dev/null || true)
+
+          for source in $SOURCES; do
+            if [ -n "$source" ] && [ ! -f "$source" ]; then
+              echo "❌ Source file missing for $plugin: $source"
+              exit 1
+            fi
+          done
+
+          echo "✅ $plugin is valid"
+        done
+
+    - name: Lint Check
+      run: |
+        echo "Running lint checks..."
+
+        # Check for trailing whitespace
+        if grep -r "[[:space:]]$" --include="*.md" --include="*.json" .; then
+          echo "❌ Found trailing whitespace"
+          exit 1
+        fi
+
+        # Check for common issues
+        echo "Checking for common issues..."
+
+        # Check JSON files are properly formatted
+        find . -name "*.json" -type f -exec jq . {} >/dev/null \;
+
+        # Check for TODO/FIXME comments
+        TODO_COUNT=$(grep -r "TODO\|FIXME" --include="*.md" --include="*.json" . | wc -l || true)
+        if [ "$TODO_COUNT" -gt 0 ]; then
+          echo "⚠️ Found $TODO_COUNT TODO/FIXME comments"
+          grep -rn "TODO\|FIXME" --include="*.md" --include="*.json" . || true
+        fi
+
+    - name: Security Scan
+      run: |
+        echo "Running security scan..."
+
+        # Check for hardcoded secrets (basic check)
+        if grep -rE "(password|secret|key|token)\s*[:=]\s*['\"][^'\"]{8,}" --include="*.json" --include="*.md" .; then
+          echo "❌ Potential hardcoded secrets found!"
+          exit 1
+        fi
+
+        # Check for executable scripts
+        find . -name "*.sh" -type f -exec echo "Checking script: {}" \; -exec head -n 5 {} \;
+
+        echo "✅ Security scan passed"
+
+    - name: PR Comment
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+
+          // Get changed files
+          const { execSync } = require('child_process');
+          const changedFiles = execSync('git diff --name-only origin/${{ github.base_ref }}...HEAD', { encoding: 'utf8' }).trim().split('\n');
+
+          // Categorize changes
+          const categories = {
+            agents: changedFiles.filter(f => f.includes('agents/')).length,
+            commands: changedFiles.filter(f => f.includes('commands/')).length,
+            hooks: changedFiles.filter(f => f.includes('hooks/')).length,
+            mcp: changedFiles.filter(f => f.includes('mcp/')).length,
+            skills: changedFiles.filter(f => f.includes('skills/')).length,
+            docs: changedFiles.filter(f => f.endsWith('.md')).length
+          };
+
+          // Build comment
+          let comment = '## 📋 Plugin Changes Summary\n\n';
+          comment += '### Changes by Category:\n\n';
+
+          if (categories.agents > 0) comment += `- 🤖 **${categories.agents}** Agent files changed\n`;
+          if (categories.commands > 0) comment += `- ⚡ **${categories.commands}** Command files changed\n`;
+          if (categories.hooks > 0) comment += `- 🪝 **${categories.hooks}** Hook files changed\n`;
+          if (categories.mcp > 0) comment += `- 🔌 **${categories.mcp}** MCP files changed\n`;
+          if (categories.skills > 0) comment += `- 🎯 **${categories.skills}** Skill files changed\n`;
+          if (categories.docs > 0) comment += `- 📚 **${categories.docs}** Documentation files changed\n`;
+
+          comment += '\n### ✅ Validation Status\n\n';
+          comment += '- [x] Plugin configuration validated\n';
+          comment += '- [x] JSON syntax verified\n';
+          comment += '- [x] Plugin dependencies checked\n';
+          comment += '- [x] Security scan passed\n';
+          comment += '- [x] Lint checks completed\n';
+
+          // Create or update comment
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+
+    - name: Summary
+      run: |
+        echo "## Pull Request Validation ✅" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### ✅ PR is ready for review!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- All plugin configurations validated" >> $GITHUB_STEP_SUMMARY
+        echo "- No breaking changes detected" >> $GITHUB_STEP_SUMMARY
+        echo "- Plugin dependencies verified" >> $GITHUB_STEP_SUMMARY
+        echo "- Lint checks passed" >> $GITHUB_STEP_SUMMARY
+        echo "- Security scan completed" >> $GITHUB_STEP_SUMMARY

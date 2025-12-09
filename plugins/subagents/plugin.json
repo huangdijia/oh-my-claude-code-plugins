@@ -1,0 +1,36 @@
+{
+  "name": "subagents",
+  "version": "1.0.0",
+  "description": "AI-powered agents for specialized development tasks",
+  "author": "Deeka Wong",
+  "license": "MIT",
+  "homepage": "https://github.com/huangdijia/claude-code-plugins/tree/main/plugins/subagents",
+  "keywords": [
+    "ai-agents",
+    "code-review",
+    "planning",
+    "debugging",
+    "documentation"
+  ],
+  "category": "development",
+  "engines": {
+    "claude-code": ">=0.1.0"
+  },
+  "agents": [
+    "code-reviewer",
+    "data-scientist",
+    "debugger",
+    "prd-writer",
+    "steering-architect",
+    "strategic-planner",
+    "task-executor"
+  ],
+  "capabilities": [
+    "Code quality assessment",
+    "Security vulnerability detection",
+    "Strategic planning",
+    "Task execution",
+    "Data analysis",
+    "Documentation generation"
+  ]
+}

@@ -1,0 +1,172 @@
+name: Plugin Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Claude Code Plugins
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Claude Code CLI
+      run: |
+        curl -fsSL https://claude.ai/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Validate Plugin Configuration
+      run: |
+        claude plugin validate .
+
+    - name: Check JSON Syntax
+      run: |
+        echo "Checking JSON files..."
+        find . -name "*.json" -type f -exec echo "Checking {}" \; -exec jq empty {} \;
+
+    - name: Validate YAML Frontmatter
+      run: |
+        echo "Installing YAML validation tools..."
+        npm install -g js-yaml
+
+        echo "Validating YAML frontmatter in markdown files..."
+        for file in plugins/**/*.md; do
+          if [ -f "$file" ]; then
+            echo "Checking $file..."
+            # Extract YAML frontmatter between --- lines
+            awk '/^---/{flag=1;next;flag&&/^---/{flag=0;next}flag' "$file" > /tmp/yaml.yml
+            if [ -s /tmp/yaml.yml ]; then
+              js-yaml /tmp/yaml.yml || exit 1
+            fi
+          fi
+        done
+
+    - name: Check Plugin Structure
+      run: |
+        echo "Verifying plugin structure..."
+
+        # Check marketplace.json exists and is valid
+        if [ ! -f ".claude-plugin/marketplace.json" ]; then
+          echo "❌ marketplace.json not found"
+          exit 1
+        fi
+
+        # Check each plugin has plugin.json
+        for plugin in plugins/*/; do
+          if [ -d "$plugin" ]; then
+            plugin_name=$(basename "$plugin")
+            if [ ! -f "$plugin/plugin.json" ]; then
+              echo "❌ $plugin_name/plugin.json not found"
+              exit 1
+            fi
+            echo "✅ $plugin_name has plugin.json"
+          fi
+        done
+
+    - name: Validate Agent Files
+      run: |
+        echo "Validating agent files..."
+        for agent in plugins/subagents/agents/*.md; do
+          if [ -f "$agent" ]; then
+            echo "Checking $(basename "$agent")..."
+
+            # Check required frontmatter fields
+            if ! grep -q "^name:" "$agent"; then
+              echo "❌ Agent missing 'name' field: $agent"
+              exit 1
+            fi
+
+            if ! grep -q "^description:" "$agent"; then
+              echo "❌ Agent missing 'description' field: $agent"
+              exit 1
+            fi
+
+            if ! grep -q "^tools:" "$agent"; then
+              echo "❌ Agent missing 'tools' field: $agent"
+              exit 1
+            fi
+
+            echo "✅ $(basename "$agent") has required fields"
+          fi
+        done
+
+    - name: Validate Command Files
+      run: |
+        echo "Validating command files..."
+        for cmd in plugins/*/commands/**/*.md; do
+          if [ -f "$cmd" ]; then
+            echo "Checking $(basename "$cmd")..."
+
+            # Check required frontmatter fields
+            if ! grep -q "^allowed-tools:" "$cmd" && ! grep -q "^description:" "$cmd"; then
+              echo "❌ Command missing required fields: $cmd"
+              exit 1
+            fi
+
+            echo "✅ $(basename "$cmd") has required fields"
+          fi
+        done
+
+    - name: Validate Hook Files
+      run: |
+        echo "Validating hook files..."
+        for hook in plugins/*/hooks/*.json; do
+          if [ -f "$hook" ]; then
+            echo "Checking $(basename "$hook")..."
+
+            # Validate JSON syntax
+            if ! jq empty "$hook" 2>/dev/null; then
+              echo "❌ Invalid JSON in hook: $hook"
+              exit 1
+            fi
+
+            echo "✅ $(basename "$hook") has valid JSON"
+          fi
+        done
+
+    - name: Check Documentation
+      run: |
+        echo "Checking documentation files..."
+
+        # Check README exists
+        if [ ! -f "README.md" ]; then
+          echo "❌ README.md not found"
+          exit 1
+        fi
+
+        # Check CLAUDE.md exists
+        if [ ! -f "CLAUDE.md" ]; then
+          echo "❌ CLAUDE.md not found"
+          exit 1
+        fi
+
+        echo "✅ Documentation files exist"
+
+    - name: Summary
+      run: |
+        echo "## Plugin Validation Summary ✅" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### ✅ All checks passed!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- Plugin configuration validated" >> $GITHUB_STEP_SUMMARY
+        echo "- JSON syntax verified" >> $GITHUB_STEP_SUMMARY
+        echo "- YAML frontmatter validated" >> $GITHUB_STEP_SUMMARY
+        echo "- Plugin structure confirmed" >> $GITHUB_STEP_SUMMARY
+        echo "- Agent files verified" >> $GITHUB_STEP_SUMMARY
+        echo "- Command files verified" >> $GITHUB_STEP_SUMMARY
+        echo "- Hook files verified" >> $GITHUB_STEP_SUMMARY
+        echo "- Documentation confirmed" >> $GITHUB_STEP_SUMMARY

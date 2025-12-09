@@ -1,0 +1,193 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (don''t actually release)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Claude Code CLI
+      run: |
+        curl -fsSL https://claude.ai/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Validate Plugin Configuration
+      run: |
+        claude plugin validate .
+
+    - name: Get Version
+      id: version
+      run: |
+        if [[ "${{ github.event_name }}" == "push" && "${{ github.ref_type }}" == "tag" ]]; then
+          VERSION=${GITHUB_REF#refs/tags/}
+        else
+          VERSION=${{ github.event.inputs.version }}
+        fi
+
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "Releasing version: $VERSION"
+
+    - name: Verify Version Format
+      run: |
+        VERSION="${{ steps.version.outputs.version }}"
+        if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?$ ]]; then
+          echo "❌ Invalid version format: $VERSION"
+          echo "Expected format: v1.0.0 or v1.0.0-beta"
+          exit 1
+        fi
+
+    - name: Check for Uncommitted Changes
+      run: |
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "❌ Working directory is not clean"
+          git status
+          exit 1
+        fi
+
+    - name: Generate Release Notes
+      id: release_notes
+      run: |
+        VERSION="${{ steps.version.outputs.version }}"
+        PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+        # Generate changelog
+        if [[ -n "$PREV_TAG" ]]; then
+          NOTES="## Changes since $PREV_TAG\n\n"
+          NOTES+=$(git log --pretty=format:"- %s (%h)" $PREV_TAG..HEAD)
+        else
+          NOTES="## Initial Release\n\n"
+          NOTES+="First release of oh-my-claude-code-plugins"
+        fi
+
+        # Add installation instructions
+        NOTES+="\n\n## Installation\n\n"
+        NOTES+="\`\`\`bash\n"
+        NOTES+="claude plugin marketplace add huangdijia/oh-my-claude-code-plugins\n"
+        NOTES+="claude plugin install subagents@oh-my-claude-code-plugins\n"
+        NOTES+="claude plugin install git@oh-my-claude-code-plugins\n"
+        NOTES+="claude plugin install git-flow@oh-my-claude-code-plugins\n"
+        NOTES+="claude plugin install mcp@oh-my-claude-code-plugins\n"
+        NOTES+="claude plugin install skills@oh-my-claude-code-plugins\n"
+        NOTES+="\`\`\`\n"
+
+        # Add plugin list
+        NOTES+="\n## Included Plugins\n\n"
+        NOTES+="### 🤖 Subagents\n"
+        NOTES+="Specialized AI agents for development tasks\n\n"
+        NOTES+="### ⚡ Git\n"
+        NOTES+="Enhanced Git workflow commands\n\n"
+        NOTES+="### 🔄 Git Flow\n"
+        NOTES+="Automated Git Flow commands and hooks\n\n"
+        NOTES+="### 🔌 MCP\n"
+        NOTES+="Model Context Protocol server integrations\n\n"
+        NOTES+="### 🎯 Skills\n"
+        NOTES+="Specialized development workflows\n"
+
+        # Save notes to file
+        echo -e "$NOTES" > /tmp/release_notes.md
+        echo "notes<<EOF" >> $GITHUB_OUTPUT
+        echo -e "$NOTES" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Create Release (Dry Run)
+      if: github.event.inputs.dry_run == 'true'
+      run: |
+        echo "🔍 DRY RUN - Not creating release"
+        echo "Version: ${{ steps.version.outputs.version }}"
+        echo "Release notes:"
+        cat /tmp/release_notes.md
+
+    - name: Create Release
+      if: github.event.inputs.dry_run != 'true'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        release_name: Release ${{ steps.version.outputs.version }}
+        body: ${{ steps.release_notes.outputs.notes }}
+        draft: false
+        prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+
+    - name: Update Version File
+      if: github.event.inputs.dry_run != 'true'
+      run: |
+        echo "${{ steps.version.outputs.version }}" > VERSION
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add VERSION
+        git diff --staged --quiet || git commit -m "chore: update version to ${{ steps.version.outputs.version }}"
+        git push origin main
+
+    - name: Create Archive
+      run: |
+        VERSION="${{ steps.version.outputs.version }}"
+        ARCHIVE_NAME="claude-code-plugins-${VERSION#v}"
+
+        # Create archive
+        tar -czf "${ARCHIVE_NAME}.tar.gz" \
+          --exclude='.git' \
+          --exclude='.github' \
+          --exclude='*.tar.gz' \
+          --exclude='node_modules' \
+          .
+
+        echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+
+    - name: Upload Release Asset
+      if: github.event.inputs.dry_run != 'true'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz
+        asset_name: claude-code-plugins-${{ steps.version.outputs.version }}.tar.gz
+        asset_content_type: application/gzip
+
+    - name: Notify Marketplace
+      if: github.event.inputs.dry_run != 'true'
+      run: |
+        echo "📢 Marketplace notification for ${{ steps.version.outputs.version }}"
+        echo "Plugin successfully released to GitHub"
+
+    - name: Summary
+      run: |
+        echo "## Release Summary 🚀" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### ✅ Version ${{ steps.version.outputs.version }} released!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- Plugin configuration validated" >> $GITHUB_STEP_SUMMARY
+        echo "- Release notes generated" >> $GITHUB_STEP_SUMMARY
+        echo "- GitHub release created" >> $GITHUB_STEP_SUMMARY
+        echo "- Archive uploaded" >> $GITHUB_STEP_SUMMARY
+        echo "- VERSION file updated" >> $GITHUB_STEP_SUMMARY

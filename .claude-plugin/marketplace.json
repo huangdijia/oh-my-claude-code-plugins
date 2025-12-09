@@ -1,5 +1,25 @@
 {
   "name": "oh-my-claude-code-plugins",
+  "metadata": {
+    "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
+    "version": "1.0.0",
+    "homepage": "https://github.com/huangdijia/claude-code-plugins",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/huangdijia/claude-code-plugins.git"
+    },
+    "license": "MIT",
+    "keywords": [
+      "claude-code",
+      "plugins",
+      "ai-agents",
+      "git-workflow",
+      "mcp",
+      "development-tools",
+      "automation"
+    ],
+    "category": "development"
+  },
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
@@ -13,7 +33,7 @@
       "agents": [
         "./plugins/subagents/agents/code-reviewer.md",
         "./plugins/subagents/agents/data-scientist.md",
-        "./plugins/subagents/agents/debuger.md",
+        "./plugins/subagents/agents/debugger.md",
         "./plugins/subagents/agents/prd-writer.md",
         "./plugins/subagents/agents/steering-architect.md",
         "./plugins/subagents/agents/strategic-planner.md",
@@ -45,7 +65,7 @@
       ],
       "hooks": [
         "./plugins/git-flow/hooks/php-cs-fixer.json",
-        "./plugins/git-flow/hooks/aut-git-add.json",
+        "./plugins/git-flow/hooks/auto-git-add.json",
         "./plugins/git-flow/hooks/smart-commit.json"
       ]
     },
@@ -56,6 +76,16 @@
       "category": "development",
       "mcpServers": [
         "./plugins/mcp/servers.json"
+      ]
+    },
+    {
+      "name": "skills",
+      "source": "./plugins/skills",
+      "description": "Specialized development skills for feature development and code review workflows.",
+      "category": "development",
+      "skills": [
+        "./plugins/skills/feature-dev/SKILL.md",
+        "./plugins/skills/code-review/SKILL.md"
       ]
     }
   ]

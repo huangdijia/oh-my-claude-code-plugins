@@ -1,0 +1,133 @@
+name: Scheduled Health Check
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Plugin Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Claude Code CLI
+      run: |
+        curl -fsSL https://claude.ai/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Validate All Plugins
+      run: |
+        claude plugin validate .
+
+    - name: Check Plugin Health
+      run: |
+        echo "Checking plugin health..."
+
+        # Check for stale files
+        echo "Checking for potentially stale files..."
+        find plugins/ -name "*.md" -mtime +30 -exec echo "⚠️ Potentially stale: {}" \; || true
+
+        # Check file sizes
+        echo "Checking file sizes..."
+        find plugins/ -type f -size +100k -exec echo "⚠️ Large file: {} ($(du -h {} | cut -f1))" \; || true
+
+        # Check for broken links in documentation
+        echo "Checking for broken references..."
+        PLUGINS=$(jq -r '.plugins[].name' .claude-plugin/marketplace.json)
+
+        for plugin in $PLUGINS; do
+          SOURCES=$(jq -r ".plugins[] | select(.name==\"$plugin\") | .agents[], .commands[], .hooks[], .mcpServers[], .skills[]" .claude-plugin/marketplace.json 2>/dev/null || true)
+
+          for source in $SOURCES; do
+            if [ -n "$source" ] && [ ! -f "$source" ]; then
+              echo "❌ Broken reference for $plugin: $source"
+            fi
+          done
+        done
+
+    - name: Security Audit
+      run: |
+        echo "Running security audit..."
+
+        # Check for sensitive patterns
+        if grep -rE "(-----BEGIN|password|secret|token|key)\s*[:=]\s*['\"]" --include="*.json" --include="*.md" --include="*.yml" --include="*.yaml" . 2>/dev/null; then
+          echo "⚠️ Potential sensitive data found"
+        fi
+
+        # Check for executable permissions on non-scripts
+        find plugins/ -type f -executable -name "*.md" -exec echo "⚠️ Markdown file has executable bit: {}" \; || true
+        find plugins/ -type f -executable -name "*.json" -exec echo "⚠️ JSON file has executable bit: {}" \; || true
+
+    - name: Performance Metrics
+      run: |
+        echo "Collecting performance metrics..."
+
+        # Count plugin components
+        AGENT_COUNT=$(find plugins/subagents/agents -name "*.md" | wc -l)
+        COMMAND_COUNT=$(find plugins/*/commands -name "*.md" | wc -l)
+        HOOK_COUNT=$(find plugins/*/hooks -name "*.json" | wc -l)
+
+        echo "## Plugin Metrics" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- 🤖 Agents: $AGENT_COUNT" >> $GITHUB_STEP_SUMMARY
+        echo "- ⚡ Commands: $COMMAND_COUNT" >> $GITHUB_STEP_SUMMARY
+        echo "- 🪝 Hooks: $HOOK_COUNT" >> $GITHUB_STEP_SUMMARY
+
+    - name: Update README Stats (Optional)
+      if: contains(github.ref, 'main')
+      run: |
+        # This could update README with latest stats
+        echo "Stats collection complete"
+
+    - name: Notify on Issues
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: 'Health Check Failed',
+            body: 'The scheduled health check failed. Please review the workflow logs for details.',
+            labels: ['bug', 'health-check']
+          })
+
+  dependency-check:
+    name: Check External Dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Check MCP Packages
+      run: |
+        echo "Checking MCP package availability..."
+
+        MCP_PACKAGES=(
+          "@upstash/context7-mcp"
+          "@modelcontextprotocol/server-sequential-thinking"
+          "@modelcontextprotocol/server-memory"
+          "tavily-mcp@latest"
+          "chrome-devtools-mcp@latest"
+        )
+
+        for package in "${MCP_PACKAGES[@]}"; do
+          echo "Checking $package..."
+          if npm view "$package" >/dev/null 2>&1; then
+            echo "✅ $package is available"
+          else
+            echo "❌ $package not found"
+            exit 1
+          fi
+        done

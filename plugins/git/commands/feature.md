@@ -1,7 +1,27 @@
 ---
-allowed-tools: Bash(git:*)
-argument-hint: <feature-name>
+name: git:feature
+version: "1.0.0"
 description: Create a new Git Flow feature branch from develop with proper naming and tracking
+tags: [git, workflow, branch, git-flow]
+allowed-tools:
+  - bash:git:*
+argument-hint: <feature-name>
+arguments:
+  - name: feature-name
+    type: string
+    required: true
+    description: Name of the feature branch (kebab-case)
+    pattern: "^[a-z][a-z0-9-]*$"
+examples:
+  - command: "/git:feature user-authentication"
+    description: Create feature branch for user authentication
+  - command: "/git:feature payment-integration"
+    description: Create feature branch for payment integration
+  - command: "/git:feature dashboard-redesign"
+    description: Create feature branch for dashboard redesign
+categories: [development, git, workflow]
+author: "Deeka Wong"
+license: MIT
 ---
 
 # Git Flow Feature Branch

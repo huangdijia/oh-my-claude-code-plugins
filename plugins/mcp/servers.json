@@ -1,48 +1,116 @@
 {
-    "mcpServers": {
-        "context7": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@upstash/context7-mcp"
-            ],
-            "env": {
-                "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
-            }
-        },
-        "sequential-thinking": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-sequential-thinking"
-            ]
-        },
-        "memory": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-memory"
-            ],
-            "env": {
-                "MEMORY_FILE_PATH": "${CLAUDE_PROJECT_DIR}/.claude/memory.json"
-            }
-        },
-        "tavily-mcp": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "tavily-mcp@latest"
-            ],
-            "env": {
-                "TAVILY_API_KEY": "${TAVILY_API_KEY}"
-            }
-        },
-        "chrome-devtools": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "chrome-devtools-mcp@latest"
-            ]
-        }
+  "name": "mcp-integrations",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server integrations for enhanced capabilities",
+  "author": "Deeka Wong",
+  "license": "MIT",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      },
+      "required": true,
+      "description": "Documentation and code examples retrieval",
+      "category": "documentation",
+      "capabilities": ["code-examples", "documentation", "api-reference"]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "required": false,
+      "description": "Sequential thinking and reasoning enhancement",
+      "category": "cognition",
+      "capabilities": ["step-by-step-reasoning", "problem-decomposition"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "${CLAUDE_PROJECT_DIR}/.claude/memory.json"
+      },
+      "required": false,
+      "description": "Persistent memory management",
+      "category": "storage",
+      "capabilities": ["long-term-memory", "context-retention"]
+    },
+    "tavily-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@latest"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      },
+      "required": true,
+      "description": "Web search and information retrieval",
+      "category": "search",
+      "capabilities": ["web-search", "news-search", "content-extraction"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "required": false,
+      "description": "Browser automation and testing",
+      "category": "automation",
+      "capabilities": ["browser-control", "web-testing", "performance-analysis"]
     }
+  },
+  "environment": {
+    "required": [
+      {
+        "name": "CONTEXT7_API_KEY",
+        "description": "API key for Context7 documentation service",
+        "source": "https://context7.ai"
+      },
+      {
+        "name": "TAVILY_API_KEY",
+        "description": "API key for Tavily search service",
+        "source": "https://tavily.com"
+      }
+    ],
+    "optional": [
+      {
+        "name": "MEMORY_FILE_PATH",
+        "description": "Path to memory storage file",
+        "default": "${CLAUDE_PROJECT_DIR}/.claude/memory.json"
+      }
+    ]
+  },
+  "categories": {
+    "documentation": {
+      "servers": ["context7"],
+      "description": "Documentation and reference materials"
+    },
+    "cognition": {
+      "servers": ["sequential-thinking"],
+      "description": "Cognitive enhancement and reasoning"
+    },
+    "storage": {
+      "servers": ["memory"],
+      "description": "Data storage and persistence"
+    },
+    "search": {
+      "servers": ["tavily-mcp"],
+      "description": "Search and information retrieval"
+    },
+    "automation": {
+      "servers": ["chrome-devtools"],
+      "description": "Browser and web automation"
+    }
+  }
 }
