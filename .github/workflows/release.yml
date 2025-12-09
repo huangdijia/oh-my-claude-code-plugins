@@ -27,6 +27,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
+        # Fetch all history for proper changelog generation
         fetch-depth: 0
 
     - name: Setup Node.js
@@ -74,6 +75,23 @@ jobs:
           echo "❌ Working directory is not clean"
           git status
           exit 1
+        fi
+
+    - name: Update Version File (if needed)
+      run: |
+        CURRENT_VERSION=$(cat VERSION 2>/dev/null || echo "")
+        TARGET_VERSION="${{ steps.version.outputs.version }}"
+
+        if [[ "$CURRENT_VERSION" != "$TARGET_VERSION" ]]; then
+          echo "Updating VERSION file from $CURRENT_VERSION to $TARGET_VERSION"
+          echo "$TARGET_VERSION" > VERSION
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add VERSION
+          git commit -m "chore: update version to $TARGET_VERSION [skip ci]"
+          echo "VERSION file updated"
+        else
+          echo "VERSION file is already up to date"
         fi
 
     - name: Generate Release Notes
@@ -141,16 +159,6 @@ jobs:
         draft: false
         prerelease: ${{ contains(steps.version.outputs.version, '-') }}
 
-    - name: Update Version File
-      if: github.event.inputs.dry_run != 'true'
-      run: |
-        echo "${{ steps.version.outputs.version }}" > VERSION
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add VERSION
-        git diff --staged --quiet || git commit -m "chore: update version to ${{ steps.version.outputs.version }}"
-        git push origin main
-
     - name: Create Archive
       run: |
         VERSION="${{ steps.version.outputs.version }}"
@@ -165,6 +173,17 @@ jobs:
           .
 
         echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+
+    - name: Push Version Update (if any)
+      if: github.event.inputs.dry_run != 'true'
+      run: |
+        # Push any version file updates
+        if [[ -n $(git status --porcelain VERSION) ]]; then
+          echo "Pushing VERSION file update"
+          git push origin main
+        else
+          echo "No VERSION file changes to push"
+        fi
 
     - name: Upload Release Asset
       if: github.event.inputs.dry_run != 'true'
