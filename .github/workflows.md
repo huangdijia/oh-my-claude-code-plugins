@@ -7,11 +7,13 @@ This document describes the GitHub Actions workflows used to validate and mainta
 ### 1. Plugin Validation (`.github/workflows/validate.yml`)
 
 **Triggers:**
+
 - Push to `main` or `develop` branches
 - Pull requests to `main` or `develop`
 - Manual dispatch
 
 **Validations:**
+
 - ✅ Plugin configuration validation using `claude plugin validate .`
 - ✅ JSON syntax checking
 - ✅ YAML frontmatter validation
@@ -24,9 +26,11 @@ This document describes the GitHub Actions workflows used to validate and mainta
 ### 2. Pull Request Checks (`.github/workflows/pr-check.yml`)
 
 **Triggers:**
+
 - Pull request opened, synchronized, or reopened
 
 **Checks:**
+
 - ✅ Plugin configuration validation
 - ✅ Breaking change detection
 - ✅ Plugin dependency verification
@@ -37,10 +41,12 @@ This document describes the GitHub Actions workflows used to validate and mainta
 ### 3. Release (`.github/workflows/release.yml`)
 
 **Triggers:**
+
 - Git tag push (`v*`)
 - Manual dispatch with version input
 
 **Features:**
+
 - ✅ Comprehensive validation before release
 - ✅ Automatic release notes generation
 - ✅ GitHub release creation
@@ -51,10 +57,12 @@ This document describes the GitHub Actions workflows used to validate and mainta
 ### 4. Scheduled Health Check (`.github/workflows/health-check.yml`)
 
 **Triggers:**
+
 - Daily at 2 AM UTC
 - Manual dispatch
 
 **Monitoring:**
+
 - ✅ Plugin health status
 - ✅ Stale file detection
 - ✅ Security audit
@@ -96,6 +104,7 @@ The workflows validate:
 ### Automated Release
 
 1. Create and push a version tag:
+
    ```bash
    git tag v1.0.0
    git push origin v1.0.0
@@ -155,6 +164,7 @@ done
 ## 📈 Metrics and Monitoring
 
 The health check workflow collects:
+
 - Number of agents, commands, and hooks
 - Plugin health status
 - External dependency availability
@@ -163,6 +173,7 @@ The health check workflow collects:
 ## 🛡️ Security
 
 The workflows include:
+
 - Secret detection (basic pattern matching)
 - Executable file permission checks
 - Dependency validation for MCP packages
@@ -171,6 +182,7 @@ The workflows include:
 ## 🔄 Continuous Integration
 
 All changes go through:
+
 1. **Push Validation** - Ensures code quality on every push
 2. **PR Validation** - Additional checks before merging
 3. **Release Validation** - Comprehensive checks before release
