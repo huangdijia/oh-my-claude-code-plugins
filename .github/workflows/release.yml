@@ -181,7 +181,7 @@ jobs:
     - name: Create Archive
       run: |
         VERSION="${{ steps.version.outputs.version }}"
-        ARCHIVE_NAME="claude-code-plugins-${VERSION#v}"
+        ARCHIVE_NAME="oh-my-claude-code-plugins-${VERSION#v}"
 
         echo "=== Archive Creation Debug Info ==="
         echo "Current directory: $(pwd)"
