@@ -22,12 +22,15 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '22'
-        cache: 'npm'
 
     - name: Install Claude Code CLI
       run: |
         curl -fsSL https://claude.ai/install.sh | sh
         echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install validation tools
+      run: |
+        npm install -g js-yaml jq
 
     - name: Validate Plugin Configuration
       run: |
@@ -40,9 +43,6 @@ jobs:
 
     - name: Validate YAML Frontmatter
       run: |
-        echo "Installing YAML validation tools..."
-        npm install -g js-yaml
-
         echo "Validating YAML frontmatter in markdown files..."
         for file in plugins/**/*.md; do
           if [ -f "$file" ]; then
