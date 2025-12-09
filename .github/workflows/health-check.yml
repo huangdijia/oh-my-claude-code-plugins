@@ -27,7 +27,7 @@ jobs:
 
     - name: Install required tools
       run: |
-        npm install -g jq
+        sudo apt-get update && sudo apt-get install -y jq
 
     - name: Validate All Plugins
       run: |
