@@ -70,8 +70,8 @@ jobs:
         for plugin in plugins/*/; do
           if [ -d "$plugin" ]; then
             plugin_name=$(basename "$plugin")
-            if [ ! -f "$plugin/plugin.json" ]; then
-              echo "❌ $plugin_name/plugin.json not found"
+            if [ ! -f "$plugin/.claude-plugin/plugin.json" ]; then
+              echo "❌ $plugin_name plugin.json not found"
               exit 1
             fi
             echo "✅ $plugin_name has plugin.json"
