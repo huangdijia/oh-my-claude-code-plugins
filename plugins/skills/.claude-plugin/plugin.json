@@ -1,0 +1,9 @@
+{
+  "name": "skills",
+  "version": "1.0.0",
+  "description": "Claude Code Skills for specialized development workflows",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  }
+}

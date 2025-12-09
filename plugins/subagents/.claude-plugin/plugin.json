@@ -1,0 +1,9 @@
+{
+  "name": "subagents",
+  "version": "1.0.0",
+  "description": "AI-powered agents for specialized development tasks",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  }
+}

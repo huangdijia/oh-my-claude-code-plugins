@@ -1,4 +1,5 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "oh-my-claude-code-plugins",
   "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
   "version": "1.0.0",
@@ -6,85 +7,36 @@
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
   },
-  "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/huangdijia/oh-my-claude-code-plugins.git"
-  },
-  "license": "MIT",
-  "keywords": [
-    "claude-code",
-    "plugins",
-    "ai-agents",
-    "git-workflow",
-    "mcp",
-    "development-tools",
-    "automation"
-  ],
-  "category": "development",
   "plugins": [
     {
       "name": "subagents",
       "source": "./plugins/subagents",
       "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
-      "category": "development",
-      "agents": [
-        "./plugins/subagents/agents/code-reviewer.md",
-        "./plugins/subagents/agents/data-scientist.md",
-        "./plugins/subagents/agents/debugger.md",
-        "./plugins/subagents/agents/prd-writer.md",
-        "./plugins/subagents/agents/steering-architect.md",
-        "./plugins/subagents/agents/strategic-planner.md",
-        "./plugins/subagents/agents/task-executor.md"
-      ]
+      "category": "development"
     },
     {
       "name": "git",
       "source": "./plugins/git",
       "description": "Enhance your Git experience with Claude's Git plugin for seamless version control.",
-      "category": "development",
-      "commands": [
-        "./plugins/git/commands/feature.md",
-        "./plugins/git/commands/flow-status.md",
-        "./plugins/git/commands/hotfix.md"
-      ]
+      "category": "development"
     },
     {
       "name": "git-flow",
       "source": "./plugins/git-flow",
       "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
-      "category": "development",
-      "commands": [
-        "./plugins/git-flow/commands/commit/create.md",
-        "./plugins/git-flow/commands/mr/create.md",
-        "./plugins/git-flow/commands/mr/review.md",
-        "./plugins/git-flow/commands/pr/create.md",
-        "./plugins/git-flow/commands/pr/review.md"
-      ],
-      "hooks": [
-        "./plugins/git-flow/hooks/php-cs-fixer.json",
-        "./plugins/git-flow/hooks/auto-git-add.json",
-        "./plugins/git-flow/hooks/smart-commit.json"
-      ]
+      "category": "development"
     },
     {
       "name": "mcp",
       "source": "./plugins/mcp",
       "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
-      "category": "development",
-      "mcpServers": [
-        "./plugins/mcp/servers.json"
-      ]
+      "category": "development"
     },
     {
       "name": "skills",
       "source": "./plugins/skills",
       "description": "Specialized development skills for feature development and code review workflows.",
-      "category": "development",
-      "skills": [
-        "./plugins/skills/feature-dev/SKILL.md",
-        "./plugins/skills/code-review/SKILL.md"
-      ]
+      "category": "development"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "name": "mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server integrations for enhanced capabilities",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  }
+}

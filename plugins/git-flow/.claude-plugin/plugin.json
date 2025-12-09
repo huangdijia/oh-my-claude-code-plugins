@@ -1,0 +1,9 @@
+{
+  "name": "git-flow",
+  "version": "1.0.0",
+  "description": "Comprehensive Git Flow automation with hooks and commands",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  }
+}
