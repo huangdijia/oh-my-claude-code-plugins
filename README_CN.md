@@ -226,7 +226,7 @@ claude plugin install skills@oh-my-claude-code-plugins
 ## 🏗️ 项目结构
 
 ```bash
-claude-marketplace/
+oh-my-claude-code-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # 插件注册表
 └── plugins/
@@ -242,7 +242,6 @@ claude-marketplace/
     ├── git/                      # Git 命令插件
     │   └── commands/             # 斜杠命令
     │       ├── feature.md
-    │       ├── flow-status.md
     │       └── hotfix.md
     ├── git-flow/                 # Git Flow 自动化插件
     │   ├── commands/             # 斜杠命令
@@ -357,7 +356,7 @@ specs/
 
 ```json
 {
-  "name": "claude-code-plugins",
+  "name": "oh-my-claude-code-plugins",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"

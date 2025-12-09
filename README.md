@@ -226,7 +226,7 @@ Each agent has specific tool access for security:
 ## 🏗️ Project Structure
 
 ```bash
-claude-marketplace/
+oh-my-claude-code-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin registry
 └── plugins/
@@ -242,7 +242,6 @@ claude-marketplace/
     ├── git/                      # Git commands plugin
     │   └── commands/             # Slash commands
     │       ├── feature.md
-    │       ├── flow-status.md
     │       └── hotfix.md
     ├── git-flow/                 # Git Flow automation plugin
     │   ├── commands/             # Slash commands
@@ -357,7 +356,7 @@ The plugin is registered in `.claude-plugin/marketplace.json`:
 
 ```json
 {
-  "name": "claude-code-plugins",
+  "name": "oh-my-claude-code-plugins",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"

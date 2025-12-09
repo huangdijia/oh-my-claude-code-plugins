@@ -142,11 +142,11 @@ Hooks are JSON files with:
 
 ### MCP Servers
 
-`plugins/mcp/servers.json` configures external integrations requiring:
+`plugins/mcp/.mcp.json` configures external integrations requiring:
 
 - `CONTEXT7_API_KEY`: For documentation retrieval
 - `TAVILY_API_KEY`: For web search
-- `MEMORY_FILE_PATH`: Persistent knowledge storage
+- `MEMORY_FILE_PATH`: Persistent knowledge storage (optional, defaults to `${CLAUDE_PROJECT_DIR}/.claude/memory.json`)
 
 ## Important Notes
 

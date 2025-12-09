@@ -4,7 +4,7 @@
 
 - `README.md` / `README_CN.md` describe usage; `CLAUDE.md` provides in-depth Claude Code workflows; `AGENTS.md` contains development guidelines.
 - `.claude-plugin/marketplace.json` is the single source for plugin metadata; keep file paths in sync before publishing.
-- `plugins/subagents/agents/*.md` define AI agents; `plugins/git/commands/*.md` handle Git Flow branches; `plugins/git-flow/commands/**` cover PR/MR automation, commit creation, and status; `plugins/git-flow/hooks/*.json` add optional git hooks; `plugins/mcp/servers.json` lists MCP servers; `plugins/skills/*/` contains specialized development skills.
+- `plugins/subagents/agents/*.md` define AI agents; `plugins/git/commands/*.md` handle Git Flow branches; `plugins/git-flow/commands/**` cover PR/MR automation, commit creation, and status; `plugins/git-flow/hooks/*.json` add optional git hooks; `plugins/mcp/.mcp.json` lists MCP servers; `plugins/skills/*/` contains specialized development skills.
 - Keep new assets within the relevant plugin folder and use kebab-case filenames (e.g., `new-agent.md`).
 
 ## Build, Test, and Development Commands
