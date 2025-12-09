@@ -3,9 +3,9 @@
 
 set -e
 
-echo "Installing Claude Code CLI..."
+echo "Installing Claude Code CLI (fallback)..."
 
-# Create local bin directory
+# Create local bin directory in HOME, not current directory
 mkdir -p ~/.local/bin
 
 # Check if claude is already installed
@@ -29,7 +29,7 @@ else
     # Method 2: Try direct download
     echo "npm method failed, trying direct download..."
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        # For Linux
+        # For Linux - download to home directory
         if command -v wget &> /dev/null; then
             wget -O ~/.local/bin/claude https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64 || echo "Download failed"
         elif command -v curl &> /dev/null; then
@@ -49,7 +49,7 @@ if command -v claude &> /dev/null; then
 else
     echo "❌ Claude Code CLI installation failed"
     echo "Installing a mock script for testing..."
-    # Create a mock script that just validates
+    # Create a mock script that just validates - in HOME directory
     cat > ~/.local/bin/claude << 'EOF'
 #!/bin/bash
 if [[ "$1" == "plugin" && "$2" == "validate" ]]; then

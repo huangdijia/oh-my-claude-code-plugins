@@ -71,9 +71,20 @@ jobs:
 
     - name: Check for Uncommitted Changes
       run: |
+        echo "Current working directory status:"
+        git status
+        echo ""
+        echo "Uncommitted changes:"
+        git status --porcelain
+        echo ""
+        echo "Stashed changes:"
+        git stash list || echo "No stashes"
+        echo ""
+
         if [[ -n $(git status --porcelain) ]]; then
           echo "❌ Working directory is not clean"
-          git status
+          echo "Details of changes:"
+          git diff
           exit 1
         fi
 
