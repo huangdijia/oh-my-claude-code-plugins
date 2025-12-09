@@ -1,0 +1,5 @@
+# Ignore file mode changes for shell scripts
+*.sh text eol=lf
+
+# Preserve executable permissions for scripts
+.github/scripts/* text eol=lf
