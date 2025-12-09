@@ -42,7 +42,7 @@ jobs:
 
     - name: Install required tools
       run: |
-        sudo apt-get update && sudo apt-get install -y jq
+        sudo apt-get update && sudo apt-get install -y jq rsync
 
     - name: Validate Plugin Configuration
       run: |
@@ -182,15 +182,20 @@ jobs:
         VERSION="${{ steps.version.outputs.version }}"
         ARCHIVE_NAME="claude-code-plugins-${VERSION#v}"
 
-        # Create archive
-        tar -czf "${ARCHIVE_NAME}.tar.gz" \
-          --exclude='.git' \
-          --exclude='.github' \
-          --exclude='*.tar.gz' \
-          --exclude='node_modules' \
-          .
+        # Make archive script executable
+        chmod +x .github/scripts/create-archive.sh
 
-        echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+        # Create archive using the script
+        .github/scripts/create-archive.sh "$VERSION"
+
+        # Verify archive was created
+        if [[ -f "${ARCHIVE_NAME}.tar.gz" ]]; then
+          echo "✅ Archive created successfully"
+          echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+        else
+          echo "❌ Archive creation failed"
+          exit 1
+        fi
 
     - name: Push Version Update (if any)
       if: github.event.inputs.dry_run != 'true'
