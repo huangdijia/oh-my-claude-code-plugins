@@ -1,11 +1,14 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "oh-my-claude-code-plugins",
-  "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
   "version": "1.0.0",
+  "description": "A comprehensive marketplace collection of Claude Code plugins featuring AI agents, Git workflow automation, MCP integrations, and specialized development tools to enhance your productivity.",
   "owner": {
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com"
+  },
+  "metadata": {
+    "description": "A curated marketplace offering a comprehensive collection of Claude Code plugins including AI agents for specialized tasks, Git workflow automation, MCP server integrations, and development tools designed to enhance productivity and streamline development workflows."
   },
   "plugins": [
     {
