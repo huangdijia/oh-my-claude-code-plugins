@@ -24,23 +24,46 @@ trap 'rm -rf "$TEMP_DIR"' EXIT
 # Create directory structure in temp
 mkdir -p "$TEMP_DIR/claude-code-plugins"
 
-# Copy files using find to avoid issues with changing files
-echo "Copying files..."
-find . -maxdepth 1 \
-    ! -name '.git' \
-    ! -name '.github' \
-    ! -name '*.tar.gz' \
-    ! -name 'node_modules' \
-    ! -name '.DS_Store' \
-    ! -name '*.log' \
-    -exec cp -r {} "$TEMP_DIR/claude-code-plugins/" \;
+# List what will be copied
+echo "Files to be included:"
+find . -type f -name "*.md" -o -name "*.json" -o -name "VERSION" -o -name "*.txt" | head -20
 
-# Copy necessary metadata files
-cp -r VERSION "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || echo "VERSION file not found, skipping"
+# Copy essential files
+echo "Copying files..."
+
+# Copy all markdown files (docs, README, etc.)
+find . -maxdepth 1 -name "*.md" -type f -exec cp {} "$TEMP_DIR/claude-code-plugins/" \;
+
+# Copy VERSION file
+cp VERSION "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || echo "VERSION file not found"
+
+# Copy .claude-plugin directory
+cp -r .claude-plugin "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || echo ".claude-plugin directory not found"
+
+# Copy plugins directory
+cp -r plugins "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || echo "plugins directory not found"
+
+# Copy any license files
+cp -r LICENSE* "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || true
+
+# Copy .gitignore if exists
+cp .gitignore "$TEMP_DIR/claude-code-plugins/" 2>/dev/null || true
+
+# Verify files were copied
+echo "Files copied to temp directory:"
+find "$TEMP_DIR/claude-code-plugins" -type f | head -20
 
 # Create the archive
 echo "Creating archive..."
 tar -czf "${ARCHIVE_NAME}.tar.gz" -C "$TEMP_DIR" claude-code-plugins
 
-echo "✅ Archive created successfully: ${ARCHIVE_NAME}.tar.gz"
-ls -lh "${ARCHIVE_NAME}.tar.gz"
+# Verify archive was created
+if [[ -f "${ARCHIVE_NAME}.tar.gz" ]]; then
+    echo "✅ Archive created successfully: ${ARCHIVE_NAME}.tar.gz"
+    echo "Archive contents:"
+    tar -tzf "${ARCHIVE_NAME}.tar.gz" | head -30
+    ls -lh "${ARCHIVE_NAME}.tar.gz"
+else
+    echo "❌ Archive creation failed"
+    exit 1
+fi

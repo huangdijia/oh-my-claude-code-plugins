@@ -183,6 +183,14 @@ jobs:
         VERSION="${{ steps.version.outputs.version }}"
         ARCHIVE_NAME="claude-code-plugins-${VERSION#v}"
 
+        echo "=== Archive Creation Debug Info ==="
+        echo "Current directory: $(pwd)"
+        echo "Version: $VERSION"
+        echo "Archive name: $ARCHIVE_NAME.tar.gz"
+        echo "Current files:"
+        ls -la | head -20
+        echo ""
+
         # Make archive script executable
         chmod +x .github/scripts/create-archive.sh
 
@@ -190,6 +198,10 @@ jobs:
         .github/scripts/create-archive.sh "$VERSION"
 
         # Verify archive was created
+        echo ""
+        echo "=== Post-creation Verification ==="
+        ls -la *.tar.gz 2>/dev/null || echo "No tar.gz files found"
+
         if [[ -f "${ARCHIVE_NAME}.tar.gz" ]]; then
           echo "✅ Archive created successfully"
           echo "archive_name=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
@@ -199,6 +211,7 @@ jobs:
           fi
         else
           echo "❌ Archive creation failed"
+          echo "Expected file: ${ARCHIVE_NAME}.tar.gz"
           exit 1
         fi
 
