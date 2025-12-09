@@ -165,18 +165,18 @@ jobs:
         echo "Release notes:"
         cat /tmp/release_notes.md
 
-    # - name: Create Release
-    #   id: create_release
-    #   if: github.event.inputs.dry_run != 'true'
-    #   uses: actions/create-release@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     tag_name: ${{ steps.version.outputs.version }}
-    #     release_name: Release ${{ steps.version.outputs.version }}
-    #     body: ${{ steps.release_notes.outputs.notes }}
-    #     draft: false
-    #     prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+    - name: Create Release
+      id: create_release
+      if: github.event.inputs.dry_run != 'true'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        release_name: Release ${{ steps.version.outputs.version }}
+        body: ${{ steps.release_notes.outputs.notes }}
+        draft: false
+        prerelease: ${{ contains(steps.version.outputs.version, '-') }}
 
     # - name: Create Archive
     #   run: |
