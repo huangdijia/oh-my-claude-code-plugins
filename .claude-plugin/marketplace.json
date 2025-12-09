@@ -10,32 +10,32 @@
   "plugins": [
     {
       "name": "subagents",
-      "source": "./plugins/subagents",
       "description": "Boost your development workflow with AI-powered agents for code review, debugging, and strategic planning.",
+      "source": "./plugins/subagents",
       "category": "development"
     },
     {
       "name": "git",
-      "source": "./plugins/git",
       "description": "Enhance your Git experience with Claude's Git plugin for seamless version control.",
+      "source": "./plugins/git",
       "category": "development"
     },
     {
       "name": "git-flow",
-      "source": "./plugins/git-flow",
       "description": "Automate Git workflows with ease using GitFlow plugin for Claude.",
+      "source": "./plugins/git-flow",
       "category": "development"
     },
     {
       "name": "mcp",
-      "source": "./plugins/mcp",
       "description": "MCP (Model Context Protocol) for Claude Code, enabling advanced mcp interactions.",
+      "source": "./plugins/mcp",
       "category": "development"
     },
     {
       "name": "skills",
-      "source": "./plugins/skills",
       "description": "Specialized development skills for feature development and code review workflows.",
+      "source": "./plugins/skills",
       "category": "development"
     }
   ]
