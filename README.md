@@ -233,7 +233,7 @@ claude-marketplace/
     │   │       ├── create.md
     │   │       └── review.md
     │   └── hooks/                # Event hooks
-    │       ├── aut-git-add.json
+    │       ├── auto-git-add.json
     │       ├── php-cs-fixer.json
     │       └── smart-commit.json
     └── mcp/                      # MCP servers plugin
