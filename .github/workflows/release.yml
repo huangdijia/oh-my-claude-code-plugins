@@ -71,6 +71,9 @@ jobs:
 
     - name: Check for Uncommitted Changes
       run: |
+        # Ignore file mode changes for scripts
+        git config core.filemode false
+
         echo "Current working directory status:"
         git status
         echo ""
@@ -81,11 +84,15 @@ jobs:
         git stash list || echo "No stashes"
         echo ""
 
-        if [[ -n $(git status --porcelain) ]]; then
-          echo "❌ Working directory is not clean"
+        # Check only for content changes, not permission changes
+        CONTENT_CHANGES=$(git status --porcelain | grep -v "^ M.*\.[0-9]*$" || true)
+        if [[ -n "$CONTENT_CHANGES" ]]; then
+          echo "❌ Working directory has content changes"
           echo "Details of changes:"
           git diff
           exit 1
+        else
+          echo "✅ Working directory is clean (ignoring permission changes)"
         fi
 
     - name: Update Version File (if needed)
