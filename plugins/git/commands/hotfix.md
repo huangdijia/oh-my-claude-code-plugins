@@ -409,7 +409,7 @@ develop ────────────────────┴───
 ## Related Commands
 
 - `/finish` - Complete hotfix (merge to main and develop, create tag, deploy)
-- `/flow-status` - Check current Git Flow status
+- `/git-flow:status` - Check current Git Flow status
 - `/feature <name>` - Create feature branch (for non-critical fixes)
 - `/release <version>` - Create release branch
 

@@ -201,7 +201,7 @@ This command respects:
 ## Related Commands
 
 - `/finish` - Complete and merge feature branch to develop
-- `/flow-status` - Check current Git Flow status
+- `/git-flow:status` - Check current Git Flow status
 - `/release <version>` - Create release branch from develop
 - `/hotfix <name>` - Create hotfix branch from main
 

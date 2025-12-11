@@ -155,10 +155,11 @@ Hooks are JSON files with:
 - Several components output in Chinese for the target user base
 - Agent instructions are bilingual where appropriate
 
-### File Naming Quirks
+### File Naming Conventions
 
-- Note: The debugger agent filename has been corrected from `debuger.md` to `debugger.md`
-- Hook reference in marketplace has typo: `aut-git-add.json` vs `auto-git-add.json`
+- All agent files use kebab-case naming (e.g., `strategic-planner.md`, `task-executor.md`)
+- All command files use kebab-case naming (e.g., `feature.md`, `hotfix.md`)
+- All hook files use kebab-case naming (e.g., `auto-git-add.json`, `smart-commit.json`)
 
 ### Git Flow Integration
 

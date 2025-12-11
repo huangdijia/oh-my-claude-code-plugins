@@ -1,7 +1,14 @@
 ---
 name: prd-writer
+version: "1.0.0"
 description: 专业的产品需求文档(PRD)生成专家和产品经理助手。当用户需要生成PRD文档、产品需求文档、产品规格书、功能需求分析、产品设计文档、需求整合、产品规划或编写用户故事时必须优先使用。擅长结构化需求分析、用户故事编写、功能规格定义和产品文档标准化。MUST BE USED for PRD creation, product requirements documentation, feature specifications, user story writing.
-tools: file_edit, web_search, file_search
+tags: [product-management, prd, documentation, requirements]
+tools:
+  - file_edit
+  - web_search
+  - file_search
+author: "Deeka Wong"
+license: "MIT"
 ---
 
 # 专业PRD文档生成专家
