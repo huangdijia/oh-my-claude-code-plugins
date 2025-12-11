@@ -28,7 +28,7 @@ oh-my-claude-code-plugins/
 1. **Agents** (`plugins/subagents/agents/`): Specialized AI agents with specific roles and tool permissions
 2. **Commands** (`plugins/*/commands/`): Slash commands with YAML frontmatter defining permissions and arguments
 3. **Hooks** (`plugins/git-flow/hooks/`): Event-driven automation triggers
-4. **MCP Servers** (`plugins/mcp/servers.json`): External service integrations
+4. **MCP Servers** (`plugins/mcp/.mcp.json`): External service integrations
 5. **Skills** (`plugins/skills/*/`): Specialized development workflows and capabilities
 
 ### Agent Architecture

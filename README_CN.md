@@ -259,7 +259,7 @@ oh-my-claude-code-plugins/
     │       ├── php-cs-fixer.json
     │       └── smart-commit.json
     ├── mcp/                      # MCP 服务器插件
-    │   └── servers.json
+    │   └── .mcp.json
     └── skills/                   # 开发技能插件
         ├── code-review/
         │   └── SKILL.md
