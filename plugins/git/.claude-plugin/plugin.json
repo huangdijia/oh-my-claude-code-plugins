@@ -6,18 +6,5 @@
     "name": "Deeka Wong",
     "email": "huangdijia@gmail.com",
     "url": "https://github.com/huangdijia"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/huangdijia/oh-my-claude-code-plugins/tree/main/plugins/git",
-  "keywords": [
-    "git",
-    "version-control",
-    "workflow",
-    "branching"
-  ],
-  "commands": [
-    "./commands/feature.md",
-    "./commands/hotfix.md",
-    "./commands/flow-status.md"
-  ]
+  }
 }
