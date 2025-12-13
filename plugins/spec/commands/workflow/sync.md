@@ -87,7 +87,7 @@ TASK_PROGRESS=$((TASK_DONE * 100 / TASK_TOTAL))
 - **progress**: Percentage complete
 - **implementation_notes**: Recent changes summary
 
-### 4. Check for Stale Specifications | 检查过期货档
+### 4. Check for Stale Specifications | 检查过期文档
 
 Identify specifications that might be outdated:
 识别可能过时的规格：
