@@ -18,7 +18,7 @@ arguments:
   - name: assignee
     type: string
     required: true
-    description: Name or ID of the assignee
+    description: Name or ID of the assignee (must start with a letter; can contain letters, numbers, underscores, and hyphens)
     pattern: "^[a-zA-Z][a-zA-Z0-9_-]*$"
 examples:
   - command: "/task assign TASK-001 john"
