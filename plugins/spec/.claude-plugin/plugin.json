@@ -1,0 +1,9 @@
+{
+  "name": "spec",
+  "version": "1.0.0",
+  "description": "A spec-driven development workflow plugin for Claude Code that systematizes the process from idea to specification to tasks to implementation",
+  "author": {
+    "name": "Deeka Wong",
+    "email": "huangdijia@gmail.com"
+  }
+}
