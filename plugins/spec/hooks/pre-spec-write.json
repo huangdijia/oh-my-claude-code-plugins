@@ -1,0 +1,17 @@
+{
+  "description": "Validates specification files before they are written or modified",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "pattern": "**/specs/*.md",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_NAME\" == \"Write\" || \"$CLAUDE_TOOL_NAME\" == \"Edit\" ]] && [[ \"$CLAUDE_TOOL_FILE_PATH\" =~ specs/.*\\.md$ ]]; then echo \"Validating specification file: $CLAUDE_TOOL_FILE_PATH\"; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

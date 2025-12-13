@@ -1,0 +1,17 @@
+{
+  "description": "Runs after tasks are created from specifications to update tracking",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "TodoWrite|Write",
+        "pattern": "**/specs/*/tasks.md",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_NAME\" == \"TodoWrite\" ]] && [[ \"$CLAUDE_TASK_COUNT\" -gt 0 ]]; then echo \"Created $CLAUDE_TASK_COUNT tasks from specification\"; touch \"$CLAUDE_PROJECT_DIR/.claude/task-updated\"; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

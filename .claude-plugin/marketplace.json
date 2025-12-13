@@ -40,6 +40,12 @@
       "description": "Specialized development skills for feature development and code review workflows.",
       "source": "./plugins/skills",
       "category": "development"
+    },
+    {
+      "name": "spec",
+      "description": "A specification-driven development workflow plugin that systematizes the process from idea to specification to tasks to implementation.",
+      "source": "./plugins/spec",
+      "category": "development"
     }
   ]
 }
