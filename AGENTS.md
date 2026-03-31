@@ -11,6 +11,7 @@
 
 - Content-only repo—no compile step.
 - Validate manifest syntax: `jq . .claude-plugin/marketplace.json`.
+- Validate marketplace compatibility with the current Claude Code CLI: `claude plugin validate .`.
 - Spot path/name drift for hooks and commands: `rg --files plugins/git-flow plugins/skills | sort`.
 - Dry-run install in Claude Code: `claude plugin marketplace add huangdijia/oh-my-claude-code-plugins` then `claude plugin install subagents@oh-my-claude-code-plugins` (repeat for `git`, `git-flow`, `mcp`, `skills`).
 
