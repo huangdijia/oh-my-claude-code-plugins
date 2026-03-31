@@ -77,7 +77,7 @@ jobs:
           fi
 
           # Check plugin.json exists
-          if [ ! -f "plugins/$plugin/plugin.json" ]; then
+          if [ ! -f "plugins/$plugin/.claude-plugin/plugin.json" ]; then
             echo "❌ plugin.json missing for: $plugin"
             exit 1
           fi
