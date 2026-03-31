@@ -9,7 +9,7 @@ description: Review Pull Request
 - Current PR diff: !`gh pr diff $ARGUMENTS`
 - Current PR files changed: !`gh pr view $ARGUMENTS --json files -q '.files[].path'`
 - Current branch: !`git branch --show-current`
-- Recent commits: !`git log --oneline -10`  
+- Recent commits: !`git log --oneline -10`
 
 ## Your task
 
